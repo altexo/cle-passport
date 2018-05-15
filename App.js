@@ -29,9 +29,9 @@ class ProfileScreen extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <Button
-        title="Go to Jane's profile"
+        title="Go to backhome"
         onPress={() =>
-          navigate('Profile', { name: 'Jane' })
+          navigate('Home', { name: 'jane' })
         }
       />
     );
