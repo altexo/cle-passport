@@ -29,7 +29,7 @@ class ProfileScreen extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <Button
-        title="Go to backhome"
+        title="Go backhome"
         onPress={() =>
           navigate('Home', { name: 'jane' })
         }
