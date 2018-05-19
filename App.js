@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Image, Button } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import HomeView from "./home.js"
-
+import HomeView from "./home.js";
+import WelcomeScreen from './views/WelcomeScreen.js';
+import  TermsAndConditionsScreen from "./views/signUp/TermsAndConditionsScreen.js";
 
 
 
@@ -16,7 +17,7 @@ class ProfileScreen extends React.Component {
       <Button
         title="Go backhome"
         onPress={() =>
-          navigate('Home', { name: 'jane' })
+          navigate('Terms', { name: 'jane' })
         }
       />
     );
@@ -24,8 +25,8 @@ class ProfileScreen extends React.Component {
 }
 
 const App = createStackNavigator({
-  Home: {
-    screen: HomeView
+  Terms: {
+    screen: TermsAndConditionsScreen
   },
   Profile:{ screen:ProfileScreen}
 });
