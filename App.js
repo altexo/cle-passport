@@ -1,8 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Image, Button } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import HomeView from "./home.js"
-
+import HomeView from "./views/home.js";
+import WelcomeScreen from './views/WelcomeScreen.js';
+import  TermsAndConditionsScreen from "./views/signUp/TermsAndConditionsScreen.js";
+import VerifyInfoScreen from "./views/signUp/VerifyInfoScreen.js";
+//import RelayingPartyScreen from './views/signUp/RelayingPartyScreen.js';
+import AuthorizeScreen from './views/signUp/AuthorizeScreen.js';
+import ScanIdScreen from './views/signUp/ScanIdScreen.js';
 
 
 class ProfileScreen extends React.Component {
@@ -23,8 +28,8 @@ class ProfileScreen extends React.Component {
 }
 
 const App = createStackNavigator({
-  Terms: {
-    screen: TermsAndConditionsScreen
+  Authorize: {
+    screen: ScanIdScreen
   },
   Profile:{ screen:ProfileScreen}
 });
