@@ -1,4 +1,6 @@
 {
+  "name": "cle-passport",
+  "displayName": "cle-passport",
   "expo": {
     "sdkVersion": "27.0.0"
   }
