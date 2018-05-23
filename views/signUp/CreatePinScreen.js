@@ -46,7 +46,7 @@ class CreatePinScreen extends Component{
           );
     }
 } 
-export default CreatePinScreen
+export default CreatePinScreen;
 
 const styles = StyleSheet.create({
     container:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},

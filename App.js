@@ -8,6 +8,7 @@ import VerifyInfoScreen from "./views/signUp/VerifyInfoScreen.js";
 //import RelayingPartyScreen from './views/signUp/RelayingPartyScreen.js';
 import AuthorizeScreen from './views/signUp/AuthorizeScreen.js';
 import ScanIdScreen from './views/signUp/ScanIdScreen.js';
+import CreatePinScreen from './views/signUp/CreatePinScreen.js';
 
 
 class ProfileScreen extends React.Component {
@@ -29,7 +30,7 @@ class ProfileScreen extends React.Component {
 
 const App = createStackNavigator({
   Authorize: {
-    screen: ScanIdScreen
+    screen: CreatePinScreen
   },
   Profile:{ screen:ProfileScreen}
 });
