@@ -1,33 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Image,Button,TextInput,TouchableWithoutFeedback,TouchableHighlight  } from "react-native";
-
-
-
-class NumberButton extends Component{
-
-
-render(){
-    return(<View style={styles.number1}><Text>{this.props.id}</Text></View>)
-}
-
-}
-
-
-
+import { View, Text, StyleSheet,Image,Button,TextInput  } from "react-native";
 
 
 class CreatePinScreen extends Component{
-    constructor(props) {
-        super(props);
-        this.state = { text: '' };
-        this.props ={ number:'0'};
-      }
-
-      pin = () => { this.setState({text:this.props.number }); };
-        
-    
-    
-
     render(){
         return (
             <View style={styles.container}>
@@ -35,36 +10,31 @@ class CreatePinScreen extends Component{
                 <Text style={styles.textStyle}> Create a PIN for accesing the application</Text>
             </View>
             <View style={styles.InputContainer}>
-            <TextInput style={{height: 80, width:400, borderColor: 'grey', borderWidth: 1}}>{this.state.text}</TextInput>
+            <TextInput style={{height: 80, width:400, borderColor: 'grey', borderWidth: 1}}></TextInput>
             </View>
             <View style={styles.ButtonsContainer}>
                         <View style={styles.ButtonRow1}>
-                        <TouchableHighlight  onPress={this.pin} style={[styles.CircleShapeView,styles.Colum1]} > 
-                                 <NumberButton key="1" id="1"/>
-                        </TouchableHighlight>
-                        <TouchableHighlight  onPress={this.pin} style={[styles.CircleShapeView,styles.Colum2]} > 
-                                    <NumberButton key="2" id="2"/>
-                        </TouchableHighlight>
-                        <TouchableHighlight  onPress={this.pin} style={[styles.CircleShapeView,styles.Colum3]} > 
-                                 <NumberButton key="3" id="3"/>
-                        </TouchableHighlight>
-                           
-                    </View> 
+                                <View style={[[styles.CircleShapeView,styles.Colum1],styles.Colum1]}></View>
+                                <View style={[[styles.CircleShapeView,styles.Colum1],styles.Colum2]}></View>
+                                <View style={[[styles.CircleShapeView,styles.Colum1],styles.Colum3]}></View>
+                                    
+                            
+                            </View> 
 
 
                         <View style={styles.ButtonRow2}>
-                                <View style={[styles.CircleShapeView,styles.Colum1,styles.number1]}><Text >4</Text></View>
-                                <View style={[styles.CircleShapeView,styles.Colum2,styles.number1]}><Text >5</Text></View>
-                                <View style={[styles.CircleShapeView,styles.Colum3,styles.number1]}><Text >6</Text></View>
+                                <View style={[[styles.CircleShapeView,styles.Colum1],styles.Colum1]}></View>
+                                <View style={[[styles.CircleShapeView,styles.Colum2],styles.Colum1]}></View>
+                                <View style={[styles.CircleShapeView,styles.Colum3]}></View>
                             
                             
                             </View> 
 
 
                         <View style={styles.ButtonRow2}>
-                                <View style={[styles.CircleShapeView,styles.Colum1,styles.number1]}><Text >7</Text></View>
-                                <View style={[styles.CircleShapeView,styles.Colum2,styles.number1]}><Text >8</Text></View>
-                                <View style={[styles.CircleShapeView,styles.Colum3,styles.number1]}><Text >9</Text></View>
+                                <View style={[styles.CircleShapeView,styles.Colum1]}></View>
+                                <View style={[styles.CircleShapeView,styles.Colum2]}></View>
+                                <View style={[styles.CircleShapeView,styles.Colum3]}></View>
                                     
                             
                             </View>     
@@ -72,14 +42,11 @@ class CreatePinScreen extends Component{
                             
 
                     </View>
-                    
         </View>
-
-       
           );
     }
 } 
-export default CreatePinScreen;
+export default CreatePinScreen
 
 const styles = StyleSheet.create({
     container:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},
@@ -94,7 +61,6 @@ const styles = StyleSheet.create({
     Colum1:{right:20},
     Colum2:{left:20},
     Colum3:{left:60},
-    number1:{justifyContent:'center',alignItems:'center'}
 
     
     
