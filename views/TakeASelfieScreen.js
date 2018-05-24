@@ -34,7 +34,7 @@ class TakeASelfieScreen extends Component{
     }
 } 
 
-export default TakeASelfieScreen
+export default TakeASelfieScreen;
 
 const styles = StyleSheet.create({
     container:{ flex:2, backgroundColor: '#FFFFFF',justifyContent:'flex-start',alignItems:'center'},

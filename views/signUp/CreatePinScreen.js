@@ -22,8 +22,12 @@ class CreatePinScreen extends Component{
         this.state = { text: '' };
         this.props ={ number:'0'};
       }
+handlepress = (val)=>{
+
+    this.setState({text:val})
+}
  
-      pin = () => { this.setState({text:this.props.number }); };
+    
 
       render(){
         return (
@@ -32,14 +36,16 @@ class CreatePinScreen extends Component{
                 <Text style={styles.textStyle}> Create a PIN for accesing the application</Text>
             </View>
             <View style={styles.InputContainer}>
-            <TextInput style={{height: 80, width:400, borderColor: 'grey', borderWidth: 1}}>{this.state.text}</TextInput>
+                <TextInput style={{height: 80, width:400, borderColor: 'grey', borderWidth: 1}}>{this.state.text}</TextInput>
             </View>
             <View style={styles.ButtonsContainer}>
-                        <View style={styles.ButtonRow1}>
-                        <TouchableHighlight  onPress={this.pin} style={[styles.CircleShapeView,styles.Colum1]} > 
-                                 <NumberButton key="1" id="1"/>
+                    <View style={styles.ButtonRow1}>
+                        <TouchableHighlight key='1' id='1'  
+                       onPress={()=>this.handlepress('1')}
+                        style={[styles.CircleShapeView,styles.Colum1]} > 
+                                 <NumberButton key="1" id='1'/>
                         </TouchableHighlight>
-                        <TouchableHighlight  onPress={this.pin} style={[styles.CircleShapeView,styles.Colum2]} > 
+                        <TouchableHighlight  onPress={()=>this.handlepress('2')} style={[styles.CircleShapeView,styles.Colum2]} > 
                                     <NumberButton key="2" id="2"/>
                         </TouchableHighlight>
                         <TouchableHighlight  onPress={this.pin} style={[styles.CircleShapeView,styles.Colum3]} > 
