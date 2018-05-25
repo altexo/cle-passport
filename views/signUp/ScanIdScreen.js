@@ -26,7 +26,6 @@ class ScanIdScreen extends Component{
     }
 } 
 
-
 export default ScanIdScreen
 
 const styles = StyleSheet.create({
