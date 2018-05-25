@@ -50,6 +50,8 @@ const styles = StyleSheet.create({
         //flex: 2,
         margin: 10,
         height: 400,
+        borderWidth: 1,
+        borderColor: '#d6d7da',
         //backgroundColor: 'red'
     },
     buttonContainer:{
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
        // backgroundColor: 'blue'
     },
     buttonStyle:{
-        
+        height: 80,
         alignItems: 'stretch'
     },
     termsText:{

@@ -9,7 +9,9 @@ import VerifyInfoScreen from "./views/signUp/VerifyInfoScreen.js";
 import AuthorizeScreen from './views/signUp/AuthorizeScreen.js';
 import ScanIdScreen from './views/signUp/ScanIdScreen.js';
 import CreatePinScreen from './views/signUp/CreatePinScreen.js';
-
+import cameraTest from './views/signUp/cameraTest.js';
+import showSelfieScreen from './views/signUp/showSelfieScreen.js';
+import AlmostDoneScreen from './views/signUp/AlmostDoneScreen.js';
 
 class ProfileScreen extends React.Component {
   static navigationOptions = {
@@ -30,7 +32,7 @@ class ProfileScreen extends React.Component {
 
 const App = createStackNavigator({
   Authorize: {
-    screen: CreatePinScreen
+    screen: cameraTest
   },
   Profile:{ screen:ProfileScreen}
 });
