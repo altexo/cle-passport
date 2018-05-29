@@ -1,14 +1,16 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Vibration, Image } from 'react-native';
-import { Constants, FileSystem, Camera, Permissions } from 'expo';
+import { Text, View, TouchableOpacity, Vibration, Image,CameraRoll } from 'react-native';
+import { Constants, FileSystem, Camera, Permissions,ImageManipulator } from 'expo';
 import showSelfieScreen from './showSelfieScreen.js';
 import { createStackNavigator } from 'react-navigation';
+
 
 export default class cameraTest extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
   };
+  
 //   async press() {
 //     console.log('Button Pressed');
 //     if (this.camera) {
@@ -18,33 +20,48 @@ export default class cameraTest extends React.Component {
 //     }
 // }
 componentDidMount() {
-  FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
-    console.log(e, 'Directory exists');
-  });
+  // FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
+  //   console.log(e, 'Directory exists');
+  // });
+
 }
 
-press = async function() {
+
+
+
+
+
+
+takePicture = async function() {
   if (this.camera) {
-    this.camera.takePictureAsync().then(data => {
-      console.log(data.uri);
-      this.setState({
-        source:{
-          uri: data.uri
-        }
-      });
-    let url =  FileSystem.moveAsync({
-        from: data.uri,
-        to: `${FileSystem.documentDirectory}photos/Photo_${this.state.photoId}.jpg`,
-      }).then(() => {
-        console.log('Then...');
-        console.log(url);
+     return this.camera.takePictureAsync().then(data => {
+           console.log("first then",data)
+
+            CameraRoll.saveToCameraRoll(data.uri, 'photo').then( data2=>{
+           
+            console.log("second then",data2);
+            this.setState({ photoId: this.state.photoId + 1,Imagesource:{
+              uri: data2
+            }         
+          });
+             
+          Vibration.vibrate();   
+          const { navigate } = this.props.navigation;
+          navigate('Selfie',this.state.Imagesource.uri)       
+        });
+
+     }
     
-        Vibration.vibrate();
-        navigate('showSelfie', { image: data.uri })
-      });
-    });
+    );
+
+    console.log("miando aqui",await photo);
+
+ 
+      
+         
   }
 };
+
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
@@ -66,13 +83,15 @@ press = async function() {
                 <View style={{ flex: 1 }}></View>
                 <TouchableOpacity
                     style={{ flex: 0, backgroundColor: 'red' }}
-                    onPress={this.press.bind(this)}
+                    onPress={this.takePicture.bind(this)}
                 >
-                    <Text>Touch Me</Text>
+                    <Text>Touch me</Text>
                 </TouchableOpacity>
                 
         </Camera>
-        {/* <Image style={{width: 200, height: 200}} source={this.state.source}/> */}
+       
+        <Image style={{flex: 1,flexDirection:'row', alignItems:'center', justifyContent: 'center'}} source={this.state.Imagesource}/>       
+       
        </View>
       
       );

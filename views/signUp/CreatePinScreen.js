@@ -22,8 +22,13 @@ class CreatePinScreen extends Component{
         this.state = { text: '' };
         this.props ={ number:'0'};
       }
+handlepress = (previousState,val)=>{
+
+    this.setState(
+    { text: previousState.text+val });
+}
  
-      pin = () => { this.setState({text:this.props.number }); };
+    
 
       render(){
         return (
@@ -32,36 +37,47 @@ class CreatePinScreen extends Component{
                 <Text style={styles.textStyle}> Create a PIN for accesing the application</Text>
             </View>
             <View style={styles.InputContainer}>
-            <TextInput style={{height: 80, width:400, borderColor: 'grey', borderWidth: 1}}>{this.state.text}</TextInput>
+                <TextInput style={{height: 80, width:400, borderColor: 'grey', borderWidth: 1}}>{this.state.text}</TextInput>
             </View>
             <View style={styles.ButtonsContainer}>
-                        <View style={styles.ButtonRow1}>
-                        <TouchableHighlight  onPress={this.pin} style={[styles.CircleShapeView,styles.Colum1]} > 
-                                 <NumberButton key="1" id="1"/>
+                    <View style={styles.ButtonRow1}>
+                        <TouchableHighlight key='1' id='1'   onPress={()=>this.handlepress(this.state,'1')} style={[styles.CircleShapeView,styles.Colum1]} > 
+                                 <NumberButton key="1" id='1'/>
                         </TouchableHighlight>
-                        <TouchableHighlight  onPress={this.pin} style={[styles.CircleShapeView,styles.Colum2]} > 
+                        <TouchableHighlight  onPress={()=>this.handlepress(this.state,'2')} style={[styles.CircleShapeView,styles.Colum2]} > 
                                     <NumberButton key="2" id="2"/>
                         </TouchableHighlight>
-                        <TouchableHighlight  onPress={this.pin} style={[styles.CircleShapeView,styles.Colum3]} > 
+                        <TouchableHighlight  onPress={()=>this.handlepress(this.state,'3')} style={[styles.CircleShapeView,styles.Colum3]} > 
                                  <NumberButton key="3" id="3"/>
                         </TouchableHighlight>
                            
                     </View> 
 
                      <View style={styles.ButtonRow2}>
-                                <View style={[styles.CircleShapeView,styles.Colum1,styles.number1]}><Text >4</Text></View>
-                                <View style={[styles.CircleShapeView,styles.Colum2,styles.number1]}><Text >5</Text></View>
-                                <View style={[styles.CircleShapeView,styles.Colum3,styles.number1]}><Text >6</Text></View>
-                            
+                     <TouchableHighlight key='4' id='4'   onPress={()=>this.handlepress(this.state,'4')} style={[styles.CircleShapeView,styles.Colum1]} > 
+                                 <NumberButton key="4" id='4'/>
+                        </TouchableHighlight>
+                        <TouchableHighlight  onPress={()=>this.handlepress(this.state,'5')} style={[styles.CircleShapeView,styles.Colum2]} > 
+                                    <NumberButton key="5" id="5"/>
+                        </TouchableHighlight>
+                        <TouchableHighlight  onPress={()=>this.handlepress(this.state,'6')} style={[styles.CircleShapeView,styles.Colum3]} > 
+                                 <NumberButton key="6" id="6"/>
+                        </TouchableHighlight>
+                                
                             
                             </View> 
  
  
                         <View style={styles.ButtonRow2}>
-                                <View style={[styles.CircleShapeView,styles.Colum1,styles.number1]}><Text >7</Text></View>
-                                <View style={[styles.CircleShapeView,styles.Colum2,styles.number1]}><Text >8</Text></View>
-                                <View style={[styles.CircleShapeView,styles.Colum3,styles.number1]}><Text >9</Text></View>
-                                    
+                        <TouchableHighlight key='7' id='7'   onPress={()=>this.handlepress(this.state,'7')} style={[styles.CircleShapeView,styles.Colum1]} > 
+                                 <NumberButton key="7" id='7'/>
+                        </TouchableHighlight>
+                        <TouchableHighlight  onPress={()=>this.handlepress(this.state,'8')} style={[styles.CircleShapeView,styles.Colum2]} > 
+                                    <NumberButton key="8" id="8"/>
+                        </TouchableHighlight>
+                        <TouchableHighlight  onPress={()=>this.handlepress(this.state,'9')} style={[styles.CircleShapeView,styles.Colum3]} > 
+                                 <NumberButton key="9" id="9"/>
+                        </TouchableHighlight>
                             
                             </View>     
                             </View>

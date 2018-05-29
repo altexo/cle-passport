@@ -34,7 +34,9 @@ const App = createStackNavigator({
   Authorize: {
     screen: cameraTest
   },
-  Profile:{ screen:ProfileScreen}
+  Profile:{ screen:ProfileScreen},
+  Selfie:{screen:showSelfieScreen}
+
 });
 
 export default App;
