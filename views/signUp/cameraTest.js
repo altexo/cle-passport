@@ -47,7 +47,7 @@ takePicture = async function() {
              
           Vibration.vibrate();   
           const { navigate } = this.props.navigation;
-          navigate('Selfie',this.state.Imagesource.uri)       
+          navigate('Selfie',data2)       
         });
 
      }

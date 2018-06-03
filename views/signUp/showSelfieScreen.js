@@ -1,44 +1,36 @@
-
-    
-
-
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,Image,Button,CameraRoll  } from "react-native";
-
+import { Constants, FileSystem, Camera, Permissions,ImageManipulator } from 'expo';
 class showSelfieScreen extends React.Component{
 
 
         componentWillMount(){
-      
-            console.log('just checking', this.props.navigation.state)
-           
-            CameraRoll.getPhotos({
-              first: 1,
-            })
-            .then(r => {
-              this.setState({ photos: r.edges });
-              console.log(this.state.photos)
-            })
-            .catch((err) => {
-               //Error Loading Images
-            });
-
-     
+          
+          const params = this.props.navigation.state
+          console.log('Params: ')
+          console.log(params.params)
+          let imageURL = params.params
+          this.setState({imageUri:{
+              uri: imageURL
+            }
+          });
+          
         }
-  
+     
   
     render(){
-      const {params} = this.props.navigation.state
+      
+   
         return (
             <View style={styles.container}>
-              <View style={styles.logoContainer}>
+              {/* <View style={styles.logoContainer}>
               <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Take a Selfie</Text>
                 </View>  
               <View style={styles.instructionContainer}><Text style={styles.welcomeText}>{params}</Text>
                 </View>    
-              </View>
-              <Image style={{flex: 1,flexDirection:'row', alignItems:'center', justifyContent: 'center'}} source={this.state.photos.node.image.uri}/>       
+              </View> */}
+              <Image style={{flex: 1,flexDirection:'row', alignItems:'center', justifyContent: 'center', width: 200, height: 200}} source={this.state.imageUri}/>       
 
             
           
@@ -51,7 +43,7 @@ class showSelfieScreen extends React.Component{
 export default showSelfieScreen
 
 const styles = StyleSheet.create({
-    container:{ flex:2, backgroundColor: '#FFFFFF',justifyContent:'flex-start',alignItems:'center'},
+    container:{ flex:1, justifyContent:'flex-start',alignItems:'center'},
     logoContainer:{ flex:5, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center',width:'100%'},
     imageContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},
     bodyContainer:{ flex:6, backgroundColor: '#c9c9c9',width:'90%', height:'100%',justifyContent:'flex-start',alignItems:'center',bottom:200},
