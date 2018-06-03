@@ -8,7 +8,7 @@ import { createStackNavigator } from 'react-navigation';
 export default class cameraTest extends React.Component {
   state = {
     hasCameraPermission: null,
-    type: Camera.Constants.Type.back,
+    type: Camera.Constants.Type.front,
   };
   
 //   async press() {
@@ -65,6 +65,11 @@ takePicture = async function() {
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
+    let permission = await Expo.Permissions.askAsync(Expo.Permissions.CAMERA_ROLL);
+
+    if (permission.status === 'granted') {
+      console.log('Granted')
+    }
   }
 
   render() {
@@ -76,21 +81,59 @@ takePicture = async function() {
     } else {
       return (
       <View style={{ flex: 1 }}>
-       <Camera
-                style={{ flex: 1 }}
-                ref={ (ref) => {this.camera = ref} }
+        <View style={{flex: 0.5}}>
+          <Text style={{fontSize: 30, textAlign:'center'}}>Take a selfie</Text>
+          <Text style={{fontSize: 15, textAlign:'left', marginLeft: 29}}>Follow the instructions..</Text>
+        </View>
+        <View style={{flex: 3.5, alignItems:'center'}}>
+          <Camera
+                style={{ width: 350, height: 450, flexDirection: 'row', alignItems: 'flex-end' }}
+                ref={ (ref) => {this.camera = ref} }type={this.state.type}
             >
                 <View style={{ flex: 1 }}></View>
                 <TouchableOpacity
-                    style={{ flex: 0, backgroundColor: 'red' }}
-                    onPress={this.takePicture.bind(this)}
+                    style={{ marginBottom: 3}}
+                    // onPress={this.takePicture.bind(this)}
+                    onPress={() => {
+                      this.setState({
+                        type: Camera.Constants.Type.front
+                         
+                      });
+                    }
+                  }
                 >
-                    <Text>Touch me</Text>
+                    <Image source={require('cle-passport/assets/icons/camera_front_black_24.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{ marginBottom: 3}}
+                    // onPress={this.takePicture.bind(this)}
+                    onPress={() => {
+                      this.setState({
+                        type: Camera.Constants.Type.back
+                         
+                      });
+                    }
+                  }
+                >
+                    <Image source={require('cle-passport/assets/icons/camera_rear_black_24.png')}/>
                 </TouchableOpacity>
                 
-        </Camera>
-       
-        <Image style={{flex: 1,flexDirection:'row', alignItems:'center', justifyContent: 'center'}} source={this.state.Imagesource}/>       
+          </Camera>
+        </View>
+        
+        <View style={{flex: 0.5, alignItems: 'center'}}>
+                  
+          <TouchableOpacity onPress={this.takePicture.bind(this)}>
+          <View style={{ width: 60,
+        height: 60,
+        borderRadius: 150/2,
+        backgroundColor: '#00BCD4',
+        justifyContent:'center',alignItems:'center', marginBottom:20}}>
+          <Image style={{width:40,height:40}}
+                  source={require('cle-passport/assets/icons/camera.png')}/>
+                  </View>
+          </TouchableOpacity>
+        </View>
        
        </View>
       
@@ -98,6 +141,8 @@ takePicture = async function() {
     }
   }
 }
+
+
 const nav = createStackNavigator({
   showSelfie: {
     screen: showSelfieScreen
