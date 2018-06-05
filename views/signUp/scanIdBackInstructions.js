@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image  } from "react-native";
+import { View, Text, StyleSheet, Image,Button  } from "react-native";
 
-class AlmosDoneScreen extends Component{
+class scanidBackInstructions extends Component{
+
+
+
+handlePress = () => {
+    const { navigate } = this.props.navigation;
+    navigate('scanBackId')
+
+
+}
+    
+
+
+
     render(){
         return (
+             
             <View style={styles.container}>
             <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>Almost done</Text>
+              <Text style={styles.titleText}>Scan your ID Back</Text>
+              <Text style={{flex:1,fontSize:20,top:20}}>instructions....</Text>
               </View>
             <View style={styles.logoContainer}>  
               <View style={styles.imageContainer}>
@@ -15,7 +30,7 @@ class AlmosDoneScreen extends Component{
             </View>
             <View style={styles.bodyContainer}>
               
-              <View style={styles.instructionContainer}><Text style={styles.welcomeText}>to prove your name and age, you should provide your official ID document</Text>
+              <View style={styles.instructionContainer}><Text style={styles.welcomeText}>why should i scan my ID?</Text>
               </View>     
             </View>
             <View style={styles.indicatorContainer}>
@@ -23,7 +38,18 @@ class AlmosDoneScreen extends Component{
             </View>   
             <View style={styles.buttonContainer}>
      
-     
+            <View style={styles.buttonContainer}>
+            <Button style={styles.singupButton} 
+             icon={require('cle-passport/assets/icons/user-plus.svg')}
+              title="start capture"
+              onPress={() =>this.handlePress()
+              
+                
+              }
+            />
+   
+          </View>
+        
             </View>
           
           </View>
@@ -31,20 +57,20 @@ class AlmosDoneScreen extends Component{
     }
 } 
 
-export default AlmosDoneScreen
+export default scanidBackInstructions
 
 const styles = StyleSheet.create({
     container:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'flex-start',alignItems:'center'},
     logoContainer:{ flex:2, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},
-    imageContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},
+    imageContainer:{ flex:2, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},
     bodyContainer:{ flex:3, backgroundColor: '#FFFFFF',width:'100%',justifyContent:'flex-start',alignItems:'center'},
     titleContainer:{ flex:2, backgroundColor: '#FFFFFF',width:'70%',justifyContent:'flex-start',alignItems:'center'},
-    titleText:{fontSize:40, top:20},
-    instructionContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center',top:30},
-    welcomeText:{fontSize:16 , bottom:70,textAlign: 'center'},
+    titleText:{fontSize:30, top:20},
+    instructionContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center',top:40},
+    welcomeText:{fontSize:20 , bottom:70,textAlign: 'center',color: 'blue'},
     indicatorContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},
     welcomeindicatorContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'stretch'},
     imgIndicator:{width:50,height:50},
-    buttonContainer:{ flex:2, backgroundColor: '#FFFFFF',justifyContent:'center',width:'90%',alignItems:'stretch',bottom:30},
+    buttonContainer:{ flex:2, backgroundColor: '#FFFFFF',justifyContent:'center',width:'90%',alignItems:'stretch',bottom:30,left:10},
     singupButton:{ flex:1, backgroundColor: '#c9c9c9',justifyContent:'center' ,alignItems:'center', height: 70},
 });
