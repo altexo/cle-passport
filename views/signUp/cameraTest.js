@@ -87,7 +87,7 @@ takePicture = async function() {
         </View>
         <View style={{flex: 3.5, alignItems:'center'}}>
           <Camera
-                style={{ width: 350, height: 450, flexDirection: 'row', alignItems: 'flex-end' }}
+                style={{flex: 0.8,marginLeft: 15, marginRight: 15, flexDirection: 'row', alignItems: 'flex-end' }}
                 ref={ (ref) => {this.camera = ref} }type={this.state.type}
             >
                 <View style={{ flex: 1 }}></View>
