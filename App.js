@@ -32,7 +32,7 @@ class ProfileScreen extends React.Component {
 
 const App = createStackNavigator({
   Authorize: {
-    screen: cameraTest
+    screen: ScanIdScreen
   },
   Profile:{ screen:ProfileScreen},
   Selfie:{screen:showSelfieScreen}
