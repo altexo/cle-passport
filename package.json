@@ -26,6 +26,7 @@
     "react-native-card-view": "0.0.3",
     "react-native-fontawesome": "^5.7.0",
     "react-native-linear-gradient": "^2.4.0",
+    "react-native-modal": "^6.1.0",
     "react-native-textinput-effects": "^0.4.2",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.0.4"
