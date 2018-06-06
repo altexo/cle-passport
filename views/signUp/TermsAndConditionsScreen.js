@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Button  } from "react-native";
 
 class TermsAndConditionsScreen extends Component{
     render(){
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -23,6 +24,7 @@ class TermsAndConditionsScreen extends Component{
                 <View style={styles.buttonContainer}>
                     <Button style={styles.buttonStyle}
                         title="Agree & Continue"
+                        onPress={()=>navigate('TakeSelfie')}
                     />
                 </View>
             </View>

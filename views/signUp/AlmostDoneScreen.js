@@ -1,32 +1,41 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image  } from "react-native";
+import { View, Text, StyleSheet, Image,TouchableOpacity,Button  } from "react-native";
 
 class AlmosDoneScreen extends Component{
     render(){
+      const { navigate } = this.props.navigation;
         return (
+      
             <View style={styles.container}>
             <View style={styles.titleContainer}>
               <Text style={styles.titleText}>Almost done</Text>
               </View>
+             
             <View style={styles.logoContainer}>  
+
               <View style={styles.imageContainer}>
                 <Image source={require('cle-passport/assets/images/cle-logo.jpeg')} style={{width:300, height: 200,resizeMode: Image.resizeMode.contain}}/>
               </View>      
             </View>
+           
             <View style={styles.bodyContainer}>
               
               <View style={styles.instructionContainer}><Text style={styles.welcomeText}>to prove your name and age, you should provide your official ID document</Text>
               </View>     
             </View>
+           
             <View style={styles.indicatorContainer}>
               
             </View>   
+        
             <View style={styles.buttonContainer}>
      
-     
+            <Button title='Continuar' onPress={()=>navigate('scanID')}></Button>
             </View>
           
           </View>
+       
+       
         );
     }
 } 

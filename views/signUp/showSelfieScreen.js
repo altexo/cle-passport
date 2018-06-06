@@ -30,7 +30,7 @@ class showSelfieScreen extends React.Component{
      
   
     render(){
-      
+      const { navigate } = this.props.navigation;
    
         return (
             <View style={styles.container}>
@@ -57,7 +57,7 @@ class showSelfieScreen extends React.Component{
                 <TouchableOpacity style={styles.buttonStyle}>
                     <Text style={{color: 'white', textAlign: 'right'}}>RETRY</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.buttonStyle}>
+                  <TouchableOpacity style={styles.buttonStyle} onPress={()=>navigate('pin')}>
                     <Text style={{color: 'white', textAlign: 'left'}}>CONTINUE</Text>
                   </TouchableOpacity>
 

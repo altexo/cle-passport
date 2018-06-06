@@ -10,23 +10,6 @@ export default class ScanIdFront extends React.Component {
     type: Camera.Constants.Type.back,
   };
   
-//   async press() {
-//     console.log('Button Pressed');
-//     if (this.camera) {
-//         console.log('Taking photo');
-//         let photo = await this.camera.takePictureAsync();
-//         console.log(photo);
-//     }
-// }
-componentDidMount() {
-  // FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
-  //   console.log(e, 'Directory exists');
-  // });
-
-}
-
-
-
 
 
 

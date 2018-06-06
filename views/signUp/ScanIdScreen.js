@@ -1,17 +1,41 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, Image, TouchableOpacity  } from "react-native";
 import Modal from "react-native-modal";
+import { createStackNavigator } from 'react-navigation';
+import verifyidFront from '../verifyIdFront';
+import verifyidBack from './verifyidBack';
+import ScanIdFront from './ScanIdFront';
+import ScanIdBack from './scanIdBack';
+import scanidBackInstructions from './scanIdBackInstructions';
+import scanidFrontInstructions from './scanIdFrontInstructions';
 
 class ScanIdScreen extends Component{
     state = {
         isModalVisible: false
       };
     
-      _toggleModal = () =>
+      _toggleModal = () =>{
+
         this.setState({ isModalVisible: !this.state.isModalVisible });
+      };
+       
+
+     handlepress = () =>{
+
+        const { navigate } = this.props.navigation;
+        this.setState({ isModalVisible: !this.state.isModalVisible });
+            navigate('scanidInstructionsFront')    
+
+
+     }
+
+       
     
     render(){
         return (
+         
+          
+
             <View style={styles.container}>
                <View style={styles.card}>
                     <View style={{flex: 0.8, alignItems: 'center',
@@ -28,7 +52,7 @@ class ScanIdScreen extends Component{
                             <Text style={{marginLeft: '5%', fontSize: 23, marginTop: 0}}>ID Type</Text>
                         </View>
                         
-                            <TouchableOpacity style={{}}>
+                            <TouchableOpacity style={{}} onPress={ () => this.handlepress()} >
 
                                 <Text style={{textAlign:'center', fontSize: 23, marginTop: '8%',marginBottom: '8%', borderWidth: 0.5,
     borderColor: 'black',}}>INE</Text>
@@ -109,3 +133,13 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0, 0, 0, 0.1)',
       },
 });
+createStackNavigator({
+    IdFront:{screen:verifyidFront},
+    IdBack:{screen:verifyidBack},
+    scanFrontId:{screen:ScanIdFront},
+    scanBackId:{screen:ScanIdBack},
+    scanidInstructionsBack:{screen:scanidBackInstructions},
+    scanidInstructionsFront:{screen:scanidFrontInstructions},
+    
+  
+  });

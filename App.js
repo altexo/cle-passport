@@ -37,15 +37,21 @@ class ProfileScreen extends React.Component {
 }
 
 const App = createStackNavigator({
-  Authorize: {
-    screen: scanidBackInstructions
-  },
+  Authorize: { screen: HomeView},
   Profile:{ screen:ProfileScreen},
   Selfie:{screen:showSelfieScreen},
   IdFront:{screen:verifyidFront},
   IdBack:{screen:verifyidBack},
   scanFrontId:{screen:ScanIdFront},
-  scanBackId:{screen:ScanIdBack}
+  scanBackId:{screen:ScanIdBack},
+  scanidInstructionsBack:{screen:scanidBackInstructions},
+  scanidInstructionsFront:{screen:scanidFrontInstructions},
+  Terms:{screen:TermsAndConditionsScreen},
+  TakeSelfie:{screen:cameraTest},
+  pin:{screen:CreatePinScreen},
+  Almost:{screen:AlmostDoneScreen},
+  scanID:{screen:ScanIdScreen}
+
 
 });
 
