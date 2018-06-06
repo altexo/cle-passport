@@ -9,7 +9,11 @@ export default class ScanIdBack extends React.Component {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
   };
-  
+  state ={ controllerLaunched: false };
+
+  updateControllerLauncher = () => {
+      this.setState({ controllerLaunched: true });
+  }
 //   async press() {
 //     console.log('Button Pressed');
 //     if (this.camera) {
@@ -72,6 +76,9 @@ takePicture = async function() {
   }
 
   render() {
+    if(this.state.controllerLaunched){
+      return null;
+  }else {
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -111,6 +118,7 @@ takePicture = async function() {
       
       );
     }
+  }
   }
 }
 

@@ -10,7 +10,11 @@ export default class ScanIdFront extends React.Component {
     type: Camera.Constants.Type.back,
   };
   
+  state ={ controllerLaunched: false };
 
+  updateControllerLauncher = () => {
+      this.setState({ controllerLaunched: true });
+  }
 
 
 
@@ -55,6 +59,9 @@ takePicture = async function() {
   }
 
   render() {
+    if(this.state.controllerLaunched){
+      return null;
+  }else {
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -94,6 +101,7 @@ takePicture = async function() {
       
       );
     }
+  }
   }
 }
 
