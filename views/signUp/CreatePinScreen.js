@@ -17,27 +17,34 @@ render(){
  
  
 class CreatePinScreen extends Component{
-    constructor(props) {
-        super(props);
-        this.state = { text: '' };
-        this.props ={ number:'0'};
-      }
+    
+        
+        state = { text: '' }
+    
+  
 handlepress = (previousState,val)=>{
 
     this.setState(
     { text: previousState.text+val });
 }
- 
+Deletepress = (previousState)=>{
+
+    var str = previousState.text.substring(0, previousState.text.length-1);
+    console.log(str)
+    this.setState(
+    { text: str });
+}
     
 
       render(){
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
             <View style={styles.textContainer}>
                 <Text style={styles.textStyle}> Create a PIN for accesing the application</Text>
             </View>
             <View style={styles.InputContainer}>
-                <TextInput style={{height: 80, width:400, borderColor: 'grey', borderWidth: 1}}>{this.state.text}</TextInput>
+                <Text style={{height: 60, width:300, borderColor: 'grey', borderWidth: 1,textAlign: 'center',alignItems:'center'}}>{this.state.text}</Text>
             </View>
             <View style={styles.ButtonsContainer}>
                     <View style={styles.ButtonRow1}>
@@ -79,7 +86,20 @@ handlepress = (previousState,val)=>{
                                  <NumberButton key="9" id="9"/>
                         </TouchableHighlight>
                             
-                            </View>     
+                            </View>
+                            <View style={styles.ButtonRow3}>
+                        <TouchableHighlight key='7' id='7'   onPress={()=>this.Deletepress(this.state,'9')} style={styles.Colum1} > 
+                        <Image style={{width:40,height:40}}
+                          source={require('cle-passport/assets/icons/cancel.png')}/>
+                        </TouchableHighlight>
+                        <TouchableHighlight  onPress={()=>this.handlepress(this.state,'0')} style={[styles.CircleShapeView,styles.Colum2]} > 
+                                    <NumberButton key="0" id="0"/>
+                        </TouchableHighlight>
+                        <TouchableHighlight  onPress={()=>navigate('Almost')} style={styles.Colum3} > 
+                                <Text style={{fontSize:15}}>OK</Text>
+                        </TouchableHighlight>
+                            
+                            </View>          
                             </View>
                     
                     </View>
@@ -98,10 +118,10 @@ handlepress = (previousState,val)=>{
                 textStyle:{ fontSize: 30, justifyContent:'center',textAlign: 'center',color:'grey'},
                 InputContainer:{flex:1,backgroundColor:'#FFFFFF',justifyContent:'flex-start',alignItems:'center',width:400,marginRight:20},
                 ButtonsContainer:{flex:3,justifyContent: 'center',alignItems:'center',right:10,bottom:80},
-                CircleShapeView: { width: 75, height: 75, borderRadius: 150/2, backgroundColor: '#00BCD4',justifyContent:'space-around',alignItems:'stretch',right:20},
+                CircleShapeView: { width: 50, height: 50, borderRadius: 150/2, backgroundColor: '#00BCD4',justifyContent:'space-around',alignItems:'stretch',right:20},
                 ButtonRow1:{flexDirection:'row',  justifyContent: 'space-around',alignItems:'stretch',paddingHorizontal:30,marginRight:30,marginTop:20 ,marginLeft:20, paddingLeft:20,paddingRight:20},
                 ButtonRow2:{flexDirection:'row',  justifyContent: 'space-around',alignItems:'stretch',paddingHorizontal:30,marginRight:30,marginTop:20,marginLeft:20,paddingLeft:20,paddingRight:20},
-                ButtonRow3:{flexDirection:'row',  justifyContent: 'space-around',alignItems:'stretch',paddingHorizontal:30,marginRight:30,marginTop:20,marginLeft:20,paddingLeft:20,paddingRight:20},
+                ButtonRow3:{flexDirection:'row',  justifyContent: 'space-around',alignItems:'stretch',paddingHorizontal:30,marginRight:30,marginTop:20,marginLeft:20,paddingLeft:20,paddingRight:20,right:10},
                 Colum1:{right:20},
                 Colum2:{left:20},
                 Colum3:{left:60},

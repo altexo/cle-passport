@@ -40,7 +40,7 @@ const HomeView = class HomeScreen extends React.Component {
              icon={require('cle-passport/assets/icons/user-plus.svg')}
               title="Sing Up"
               onPress={() =>
-                navigate('Profile', { name: 'Jane' })
+                navigate('Terms')
               }
             />
    

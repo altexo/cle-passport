@@ -12,6 +12,12 @@ import CreatePinScreen from './views/signUp/CreatePinScreen.js';
 import cameraTest from './views/signUp/cameraTest.js';
 import showSelfieScreen from './views/signUp/showSelfieScreen.js';
 import AlmostDoneScreen from './views/signUp/AlmostDoneScreen.js';
+import verifyidFront from './views/verifyIdFront.js';
+import scanidFrontInstructions from './views/signUp/scanIdFrontInstructions.js';
+import scanidBackInstructions from './views/signUp/scanIdBackInstructions.js';
+import ScanIdFront from './views/signUp/ScanIdFront.js';
+import ScanIdBack from './views/signUp/scanIdBack.js';
+import verifyidBack from './views/signUp/verifyidBack.js';
 
 class ProfileScreen extends React.Component {
   static navigationOptions = {
@@ -31,11 +37,21 @@ class ProfileScreen extends React.Component {
 }
 
 const App = createStackNavigator({
-  Authorize: {
-    screen: ScanIdScreen
-  },
+  Authorize: { screen: HomeView},
   Profile:{ screen:ProfileScreen},
-  Selfie:{screen:showSelfieScreen}
+  Selfie:{screen:showSelfieScreen},
+  IdFront:{screen:verifyidFront},
+  IdBack:{screen:verifyidBack},
+  scanFrontId:{screen:ScanIdFront},
+  scanBackId:{screen:ScanIdBack},
+  scanidInstructionsBack:{screen:scanidBackInstructions},
+  scanidInstructionsFront:{screen:scanidFrontInstructions},
+  Terms:{screen:TermsAndConditionsScreen},
+  TakeSelfie:{screen:cameraTest},
+  pin:{screen:CreatePinScreen},
+  Almost:{screen:AlmostDoneScreen},
+  scanID:{screen:ScanIdScreen}
+
 
 });
 

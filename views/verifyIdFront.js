@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,Image,Button,CameraRoll, TouchableOpacity  } from "react-native";
 import { Constants, FileSystem, Camera, Permissions,ImageManipulator } from 'expo';
-class showSelfieScreen extends React.Component{
+import { Dimensions } from 'react-native';
+class verifyidFront extends React.Component{
 
+
+    
+    
 
         componentWillMount(){
-          
+          const dim = Dimensions.get('screen');
           const params = this.props.navigation.state
           console.log('Params: ')
           console.log(params.params)
@@ -18,9 +22,16 @@ class showSelfieScreen extends React.Component{
               uri: imageURL
             }
           });
+          console.log(dim)
           
         }
 
+         isPortrait = () => {
+            const dim = Dimensions.get('screen');
+            return dim.height >= dim.width;
+        };
+
+        
 
         handlepress = (previousState,val)=>{
 
@@ -30,15 +41,17 @@ class showSelfieScreen extends React.Component{
      
   
     render(){
-      const { navigate } = this.props.navigation;
+      
    
         return (
             <View style={styles.container}>
-              <View style={{flex: 0.2}}>
-                <Text style={{fontSize: 30}}>Your profile photo</Text>
+              <View style={{flex: 0.5,alignItems:'center'}}>
+                <Text style={{flex:0.2,fontSize: 30,textAlign: 'center', }}>Check Your ID</Text>
+                <Text style={{flex:0.2,fontSize: 20,textAlign: 'center', }}>verify your ID photo is taken correctly      before we validate it</Text>
+              
               </View>
               <View style={styles.imageContainer}>
-                <Image style={{width: 400, height:330}} source={this.state.imageUri}/>       
+                <Image style={{width:300, height:150}} source={this.state.imageUri}/>       
               </View>
            
               {/* <View style={styles.buttonContainer}>
@@ -57,7 +70,7 @@ class showSelfieScreen extends React.Component{
                 <TouchableOpacity style={styles.buttonStyle}>
                     <Text style={{color: 'white', textAlign: 'right'}}>RETRY</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.buttonStyle} onPress={()=>navigate('pin')}>
+                  <TouchableOpacity style={styles.buttonStyle}>
                     <Text style={{color: 'white', textAlign: 'left'}}>CONTINUE</Text>
                   </TouchableOpacity>
 
@@ -70,7 +83,7 @@ class showSelfieScreen extends React.Component{
     }
 } 
 
-export default showSelfieScreen
+export default verifyidFront
 
 const styles = StyleSheet.create({
     container:{ 
@@ -79,8 +92,13 @@ const styles = StyleSheet.create({
       alignItems:'center'
     },
     imageContainer:
-    { flex:2, 
-      alignItems: 'center',
+    { flex:0.7, 
+      alignItems: 'flex-start',
+      justifyContent:'flex-start',
+      bottom:100
+    
+      
+    
     
     },
     buttonContainer:
