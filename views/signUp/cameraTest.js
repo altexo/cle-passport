@@ -10,7 +10,11 @@ export default class cameraTest extends React.Component {
     hasCameraPermission: null,
     type: Camera.Constants.Type.front,
   };
-  
+  state ={ controllerLaunched: false };
+
+  updateControllerLauncher = () => {
+      this.setState({ controllerLaunched: true });
+  }
 //   async press() {
 //     console.log('Button Pressed');
 //     if (this.camera) {
@@ -46,7 +50,7 @@ takePicture = async function() {
           });
              
           Vibration.vibrate();   
-          //this.camera.componentWillUnmount()
+          this.camera.componentWillUnmount()
           const { navigate } = this.props.navigation;
        
           navigate('Selfie',data2)      
@@ -74,13 +78,15 @@ takePicture = async function() {
       console.log('Granted')
     }
   }
-  componentWillUnmount(){
-
-
+  async componentWillUnmount(){
     this.camera.componentWillUnmount();
+    console.log('Desmontado segun');
   }
 
   render() {
+    if(this.state.controllerLaunched){
+      return null;
+  }else {
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -147,6 +153,7 @@ takePicture = async function() {
       
       );
     }
+  }
   }
 }
 
