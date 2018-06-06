@@ -46,6 +46,7 @@ takePicture = async function() {
           });
              
           Vibration.vibrate();   
+          //this.camera.componentWillUnmount()
           const { navigate } = this.props.navigation;
           navigate('Selfie',data2)       
         });
