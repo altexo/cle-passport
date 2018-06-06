@@ -46,7 +46,7 @@ class verifyidBack extends React.Component{
         return (
             <View style={styles.container}>
               <View style={{flex: 0.5,alignItems:'center'}}>
-                <Text style={{flex:0.2,fontSize: 30,textAlign: 'center', }}>Check Your ID</Text>
+                <Text style={{flex:0.2,fontSize: 30,textAlign: 'center', }}>Check Your ID Back</Text>
                 <Text style={{flex:0.2,fontSize: 20,textAlign: 'center', }}>verify your ID photo is taken correctly      before we validate it</Text>
               
               </View>

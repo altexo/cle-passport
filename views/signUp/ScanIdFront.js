@@ -9,12 +9,29 @@ export default class ScanIdFront extends React.Component {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
   };
-  
   state ={ controllerLaunched: false };
 
   updateControllerLauncher = () => {
       this.setState({ controllerLaunched: true });
   }
+//   async press() {
+//     console.log('Button Pressed');
+//     if (this.camera) {
+//         console.log('Taking photo');
+//         let photo = await this.camera.takePictureAsync();
+//         console.log(photo);
+//     }
+// }
+componentDidMount() {
+  // FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
+  //   console.log(e, 'Directory exists');
+  // });
+
+}
+
+
+
+
 
 
 
