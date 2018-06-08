@@ -18,6 +18,8 @@ import scanidBackInstructions from './views/signUp/scanIdBackInstructions.js';
 import ScanIdFront from './views/signUp/ScanIdFront.js';
 import ScanIdBack from './views/signUp/scanIdBack.js';
 import verifyidBack from './views/signUp/verifyidBack.js';
+import TakeASelfieScreen from './views/TakeASelfieScreen.js';
+import VerifyPinScreen from './views/signUp/VerifyPinScreen.js';
 
 class ProfileScreen extends React.Component {
   static navigationOptions = {
@@ -47,10 +49,12 @@ const App = createStackNavigator({
   scanidInstructionsBack:{screen:scanidBackInstructions},
   scanidInstructionsFront:{screen:scanidFrontInstructions},
   Terms:{screen:TermsAndConditionsScreen},
-  TakeSelfie:{screen:cameraTest},
+  TakeSelfieWelcome:{screen:cameraTest},
   pin:{screen:CreatePinScreen},
   Almost:{screen:AlmostDoneScreen},
-  scanID:{screen:ScanIdScreen}
+  scanID:{screen:ScanIdScreen},
+  TakeSelfie:{screen:TakeASelfieScreen},
+  verifyPin:{screen:VerifyPinScreen}
 
 
 });

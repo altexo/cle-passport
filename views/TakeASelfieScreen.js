@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Image,Button  } from "react-native";
+import { View, Text, StyleSheet,Image,Button,TouchableOpacity  } from "react-native";
 
 class TakeASelfieScreen extends Component{
     render(){
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
               <View style={styles.logoContainer}>
@@ -15,8 +16,11 @@ class TakeASelfieScreen extends Component{
               <View style={styles.bodyContainer}>
       
               <View style={styles.CircleShapeView}>
+              <TouchableOpacity onPress={()=>navigate('TakeSelfieWelcome')}>
               <Image style={styles.imgIndicator}
                   source={require('cle-passport/assets/icons/camera.png')}/>
+
+            </TouchableOpacity>
               </View>
                 
                  
@@ -44,8 +48,8 @@ const styles = StyleSheet.create({
     titleContainer:{ flex:1, backgroundColor: '#FFFFFF',width:'70%',justifyContent:'center',alignItems:'center',bottom:80},
     titleText:{fontSize:40, top:20},
     instructionContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'stretch',bottom:100},
-    welcomeText:{fontSize:16 , bottom:80},
-    indicatorContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},
+    welcomeText:{flex:1,fontSize:16 },
+    indicatorContainer:{ flex:0.5, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},
     welcomeindicatorContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'stretch',bottom:40},
     imgIndicator:{width:50,height:50},
     buttonContainer:{ flex:2, backgroundColor: '#FFFFFF',justifyContent:'center',width:'90%',alignItems:'stretch',bottom:30},
@@ -58,6 +62,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',alignItems:'center'
         
     },
+    whyShouldIText:{flex:1,top:100,color: 'blue'}
  
     
     

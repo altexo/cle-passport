@@ -16,7 +16,7 @@ render(){
  
  
  
-class CreatePinScreen extends Component{
+class VerifyPinScreen extends Component{
     
         
         state = { text: '' }
@@ -41,7 +41,7 @@ Deletepress = (previousState)=>{
         return (
             <View style={styles.container}>
             <View style={styles.textContainer}>
-                <Text style={styles.textStyle}> Create a PIN for accesing the application</Text>
+                <Text style={styles.textStyle}> Confirm a PIN for accesing the application</Text>
             </View>
             <View style={styles.InputContainer}>
                 <Text style={{height: 60, width:300, borderColor: 'grey', borderWidth: 1,textAlign: 'center',alignItems:'center'}}>{this.state.text}</Text>
@@ -95,7 +95,7 @@ Deletepress = (previousState)=>{
                         <TouchableHighlight  onPress={()=>this.handlepress(this.state,'0')} style={[styles.CircleShapeView,styles.Colum2]} > 
                                     <NumberButton key="0" id="0"/>
                         </TouchableHighlight>
-                        <TouchableHighlight  onPress={()=>navigate('verifyPin')} style={styles.Colum3} > 
+                        <TouchableHighlight  onPress={()=>navigate('Almost')} style={styles.Colum3} > 
                                 <Text style={{fontSize:15}}>OK</Text>
                         </TouchableHighlight>
                             
@@ -108,7 +108,7 @@ Deletepress = (previousState)=>{
                       );
                 }
             } 
-            export default CreatePinScreen;
+            export default VerifyPinScreen;
 
 
 
