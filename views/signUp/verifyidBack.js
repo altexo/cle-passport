@@ -42,7 +42,7 @@ class verifyidBack extends React.Component{
   
     render(){
       
-   
+      const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
               <View style={{flex: 0.5,alignItems:'center'}}>
@@ -70,8 +70,8 @@ class verifyidBack extends React.Component{
                 <TouchableOpacity style={styles.buttonStyle}>
                     <Text style={{color: 'white', textAlign: 'right'}}>RETRY</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.buttonStyle}>
-                    <Text style={{color: 'white', textAlign: 'left'}}>CONTINUE</Text>
+                  <TouchableOpacity style={styles.buttonStyle} onPress={()=>navigate('infoVerify')}>
+                    <Text style={{color: 'white', textAlign: 'left'} }>CONTINUE</Text>
                   </TouchableOpacity>
 
               </View>

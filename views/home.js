@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Image, Button } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
+import Amplify from 'aws-amplify';
 
  
 

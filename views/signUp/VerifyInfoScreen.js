@@ -21,7 +21,7 @@ class VerifyInfoScreen extends Component{
                         // this is used as active and passive border color
                         borderColor={'#132aa9'}
                         labelStyle={{ color: '#132aa9' }}
-                        inputStyle={{ color: '#777',fontFamily: 'sans-serif'}}
+                        inputStyle={{ color: '#777'}}
                     />
                    
                     <Madoka
@@ -29,28 +29,28 @@ class VerifyInfoScreen extends Component{
                         // this is used as active and passive border color
                         borderColor={'#132aa9'}
                         labelStyle={{ color: '#132aa9' }}
-                        inputStyle={{ color: '#777',fontFamily: 'sans-serif' }}
+                        inputStyle={{ color: '#777' }}
                     />
                     <Madoka
                         label={'Second Name'}
                         // this is used as active and passive border color
                         borderColor={'#132aa9'}
                         labelStyle={{ color: '#132aa9' }}
-                        inputStyle={{ color: '#777',fontFamily: 'sans-serif' }}
+                        inputStyle={{ color: '#777' }}
                     />
                     <Madoka
                         label={'Birthday'}
                         // this is used as active and passive border color
                         borderColor={'#132aa9'}
                         labelStyle={{ color: '#132aa9' }}
-                        inputStyle={{ color: '#777',fontFamily: 'sans-serif' }}
+                        inputStyle={{ color: '#777'}}
                     />
                     <Madoka
                         label={'Address'}
                         // this is used as active and passive border color
                         borderColor={'#132aa9'}
                         labelStyle={{ color: '#132aa9' }}
-                        inputStyle={{ color: '#777',fontFamily: 'sans-serif' }}
+                        inputStyle={{ color: '#777' }}
                     />
                     <Button title="Confirm"/>
                 </View>    
