@@ -8,7 +8,7 @@ import { createStackNavigator } from 'react-navigation';
 export default class cameraTest extends React.Component {
   state = {
     hasCameraPermission: null,
-    type: Camera.Constants.Type.front,
+    type: Camera.Constants.Type.front
   };
   state ={ controllerLaunched: false };
 
@@ -50,13 +50,13 @@ takePicture = async function() {
           });
              
           Vibration.vibrate();   
-          this.camera.componentWillUnmount()
+          
           const { navigate } = this.props.navigation;
        
           navigate('Selfie',data2)      
-        
+          //this.camera.componentWillUnmount()
         });
-
+        
      }
     
     );
@@ -78,21 +78,22 @@ takePicture = async function() {
       console.log('Granted')
     }
   }
-  async componentWillUnmount(){
-    this.camera.componentWillUnmount();
-    console.log('Desmontado segun');
-  }
+  
 
   render() {
+   
+    const { hasCameraPermission } = this.state;
     if(this.state.controllerLaunched){
       return null;
   }else {
-    const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
     } else {
+      if(this.state.controllerLaunched){
+        return null;
+    }else {
       return (
       <View style={{ flex: 1 }}>
         <View style={{flex: 0.5}}>
@@ -102,7 +103,7 @@ takePicture = async function() {
         <View style={{flex: 3.5, alignItems:'center'}}>
           <Camera
                 style={{flex: 0.8,marginLeft: 15, marginRight: 15, flexDirection: 'row', alignItems: 'flex-end' }}
-                ref={ (ref) => {this.camera = ref} }type={this.state.type}
+                ref={ (ref) => {this.camera = ref} }type={Camera.Constants.Type.front}
             >
                 <View style={{ flex: 1 }}></View>
                 <TouchableOpacity
@@ -157,6 +158,7 @@ takePicture = async function() {
   }
 }
 
+}
 
 const nav = createStackNavigator({
   showSelfie: {
@@ -164,3 +166,4 @@ const nav = createStackNavigator({
   },
  
 });
+

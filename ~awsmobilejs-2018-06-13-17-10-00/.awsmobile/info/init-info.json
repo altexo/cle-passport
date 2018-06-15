@@ -1,9 +1,16 @@
 {
+<<<<<<< Updated upstream
+	"projectPath": "C:\\Users\\cesar\\Desktop\\cle-passport",
+	"projectInfo": {
+		"ProjectName": "cle-passport",
+		"ProjectPath": "C:\\Users\\cesar\\Desktop\\cle-passport",
+=======
 	"projectPath": "/Users/altexo94/Documents/Projects/cle-passport",
-	"backupAWSMobileJSDirPath": "/Users/altexo94/Documents/Projects/cle-passport/~awsmobilejs-2018-06-13-17-10-00",
+	"backupAWSMobileJSDirPath": "/Users/altexo94/Documents/Projects/cle-passport/~awsmobilejs-2018-06-12-16-36-15",
 	"projectInfo": {
 		"ProjectName": "cle-passport",
 		"ProjectPath": "/Users/altexo94/Documents/Projects/cle-passport",
+>>>>>>> Stashed changes
 		"InitializationTime": "",
 		"LastConfigurationTime": "",
 		"LastNPMInstallTime": "",
@@ -18,12 +25,6 @@
 		"BackendProjectCreationTime": "",
 		"BackendProjectLastUpdatedTime": "",
 		"Framework": "react-native"
-	},
-	"projectConfig": {
-		"SourceDir": "/",
-		"DistributionDir": "/",
-		"BuildCommand": "npm.cmd run-script build",
-		"StartCommand": "npm start"
 	},
 	"packageJson": {
 		"name": "cle-passport",
@@ -46,14 +47,13 @@
 			"preset": "jest-expo"
 		},
 		"dependencies": {
-			"amazon-cognito-identity-js": "^2.0.9",
-			"aws-amplify": "^0.4.4",
-			"aws-amplify-react-native": "^0.2.15",
 			"expo": "^27.0.1",
 			"react": "16.3.1",
 			"react-native": "0.55.4",
-			"react-native-aws3": "0.0.8",
+<<<<<<< Updated upstream
 			"react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
+=======
+>>>>>>> Stashed changes
 			"react-native-card-view": "0.0.3",
 			"react-native-fontawesome": "^5.7.0",
 			"react-native-linear-gradient": "^2.4.0",
@@ -65,6 +65,10 @@
 		}
 	},
 	"framework": "react-native",
+<<<<<<< Updated upstream
+	"initialStage": "clean-slate",
+=======
 	"initialStage": "invalid",
+>>>>>>> Stashed changes
 	"strategy": "create"
 }

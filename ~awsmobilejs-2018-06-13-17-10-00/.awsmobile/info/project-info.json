@@ -1,6 +1,10 @@
 {
 	"ProjectName": "cle-passport",
+<<<<<<< Updated upstream
+	"ProjectPath": "C:\\Users\\cesar\\Desktop\\cle-passport",
+=======
 	"ProjectPath": "/Users/altexo94/Documents/Projects/cle-passport",
+>>>>>>> Stashed changes
 	"InitializationTime": "",
 	"LastConfigurationTime": "",
 	"LastNPMInstallTime": "",

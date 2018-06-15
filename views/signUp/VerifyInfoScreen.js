@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, Dimensions, Image  } from "react-native";
+import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity  } from "react-native";
 //import Icon from 'react-native-vector-icons/FontAwesome';
-import { Madoka } from 'react-native-textinput-effects';
-import LinearGradient from 'react-native-linear-gradient';
+
 
 
 class VerifyInfoScreen extends Component{
@@ -16,45 +15,55 @@ class VerifyInfoScreen extends Component{
                 </View>
                 <View style={styles.formContainer}>
                
-                    <Madoka
+                    {/* <Madoka
                         label={'Name'}
                         // this is used as active and passive border color
                         borderColor={'#132aa9'}
                         labelStyle={{ color: '#132aa9' }}
                         inputStyle={{ color: '#777'}}
+                    /> */}
+                    <Text>Name</Text>
+                    <TextInput underlineColorAndroid="transparent"
+                        style={{height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10}}
+                      //  placeholder="Type here to translate!"
+                        onChangeText={(text) => this.setState({text})}
                     />
+
+                      <Text>First Name</Text>
+                    <TextInput underlineColorAndroid="transparent"
+                        style={{height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10,  marginBottom: 10}}
+                       // placeholder="Type here to translate!"
+                        onChangeText={(text) => this.setState({text})}
+                    />
+                      <Text>Second Name</Text>
+                    <TextInput underlineColorAndroid="transparent"
+                        style={{height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10,  marginBottom: 10}}
+                       // placeholder="Type here to translate!"
+                        onChangeText={(text) => this.setState({text})}
+                    />
+                      <Text>Birthday</Text>
+                    <TextInput underlineColorAndroid="transparent"
+                        style={{height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10}}
+                        //placeholder="Type here to translate!"
+                        onChangeText={(text) => this.setState({text})}
+                    />
+                      <Text>Address</Text>
+                    <TextInput underlineColorAndroid="transparent"
+                        style={{height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10}}
+                      //  placeholder="Type here to translate!"
+                        onChangeText={(text) => this.setState({text})}
+                    />
+
                    
-                    <Madoka
-                        label={'First Name'}
-                        // this is used as active and passive border color
-                        borderColor={'#132aa9'}
-                        labelStyle={{ color: '#132aa9' }}
-                        inputStyle={{ color: '#777' }}
-                    />
-                    <Madoka
-                        label={'Second Name'}
-                        // this is used as active and passive border color
-                        borderColor={'#132aa9'}
-                        labelStyle={{ color: '#132aa9' }}
-                        inputStyle={{ color: '#777' }}
-                    />
-                    <Madoka
-                        label={'Birthday'}
-                        // this is used as active and passive border color
-                        borderColor={'#132aa9'}
-                        labelStyle={{ color: '#132aa9' }}
-                        inputStyle={{ color: '#777'}}
-                    />
-                    <Madoka
-                        label={'Address'}
-                        // this is used as active and passive border color
-                        borderColor={'#132aa9'}
-                        labelStyle={{ color: '#132aa9' }}
-                        inputStyle={{ color: '#777' }}
-                    />
-                    <Button title="Confirm"/>
+                  
+                    {/* <Button title="Confirm"/> */}
+                   
                 </View>    
-                
+                <View style={styles.buttonContainer}>
+                        <TouchableOpacity style={styles.buttonStyles}>
+                            <Text style={{color: 'white', fontSize: 15}}>CONFIRM</Text>
+                        </TouchableOpacity>
+                </View>
             </View>
       
         );
@@ -66,7 +75,7 @@ export default VerifyInfoScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-       // backgroundColor: 'white',
+        backgroundColor: 'white',
     },
     titlesContainer:{
         flex: 0.5,
@@ -94,22 +103,25 @@ const styles = StyleSheet.create({
         // borderBottomColor: '#fff',
 
     },
-    //Testing inputs
-    triangle: {
-        position: 'absolute',
-        right: 0,
-        bottom: 0,
-        width: 0,
-        height: 0,
-        backgroundColor: 'blue',
-        borderStyle: 'solid',
-        borderLeftWidth: Dimensions.get('window').width,
-        borderRightWidth: 0,
-        borderBottomWidth: 50,
-        borderLeftColor: 'transparent',
-        borderRightColor: 'transparent',
-        borderBottomColor: '#fff',
-      },
 
+      buttonContainer:{
+        width: '100%', 
+        height: 50, 
+        backgroundColor: '#0592fe', 
+        alignItems: 'center',
+        flexDirection: 'row' ,
+        position: 'absolute',
+        bottom: 0,
+        justifyContent:'center',
+    },
+    buttonStyles:{
+        backgroundColor: '#0592fe',
+        height: 40,
+        alignItems: 'center',
+        justifyContent:'center',
+        flexDirection: 'row',
+        width: '100%', 
+
+    },
 
 });
