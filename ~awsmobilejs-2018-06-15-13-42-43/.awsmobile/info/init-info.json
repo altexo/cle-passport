@@ -1,6 +1,6 @@
 {
 	"projectPath": "/Users/altexo94/Documents/Projects/cle-passport",
-	"backupAWSMobileJSDirPath": "/Users/altexo94/Documents/Projects/cle-passport/~awsmobilejs-2018-06-15-13-52-09",
+	"backupAWSMobileJSDirPath": "/Users/altexo94/Documents/Projects/cle-passport/~awsmobilejs-2018-06-13-17-10-00",
 	"projectInfo": {
 		"ProjectName": "cle-passport",
 		"ProjectPath": "/Users/altexo94/Documents/Projects/cle-passport",
@@ -53,6 +53,7 @@
 			"react": "16.3.1",
 			"react-native": "0.55.4",
 			"react-native-aws3": "0.0.8",
+			"react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
 			"react-native-card-view": "0.0.3",
 			"react-native-fontawesome": "^5.7.0",
 			"react-native-linear-gradient": "^2.4.0",

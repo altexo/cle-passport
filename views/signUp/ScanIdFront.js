@@ -1,10 +1,23 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Vibration, Image,CameraRoll } from 'react-native';
 import { Constants, FileSystem, Camera, Permissions,ImageManipulator } from 'expo';
-import { createStackNavigator } from 'react-navigation';
+import { Auth } from 'aws-amplify';
 
 
 export default class ScanIdFront extends React.Component {
+_cognitoSingIn = () =>{
+  const username = 'justino';
+  const password = '+`4EbERa&"fN2rP"'; 
+Auth.signIn(username, password)
+
+  .then(user => console.log(user))
+  .catch(err => console.log(err));
+}
+_cognitoConfirmSignIn = () => {
+  Auth.confirmSignIn(user, code)
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+}
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
@@ -14,25 +27,47 @@ export default class ScanIdFront extends React.Component {
   updateControllerLauncher = () => {
       this.setState({ controllerLaunched: true });
   }
-//   async press() {
-//     console.log('Button Pressed');
-//     if (this.camera) {
-//         console.log('Taking photo');
-//         let photo = await this.camera.takePictureAsync();
-//         console.log(photo);
-//     }
-// }
+
 componentDidMount() {
-  // FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
-  //   console.log(e, 'Directory exists');
-  // });
+
 
 }
 
 
-
-
-
+login = () => {
+  const { username, password } = this.state;
+  const authenticationData = {
+    Username: username,
+    Password: password,
+  };
+  const authenticationDetails = new AuthenticationDetails(authenticationData);
+  const poolData = {
+    UserPoolId: appConfig.UserPoolId,
+    ClientId: appConfig.ClientId
+  };
+  const userPool = new CognitoUserPool(poolData);
+  const userData = {
+    Username: username,
+    Pool: userPool
+  };
+  const cognitoUser = new CognitoUser(userData);
+  cognitoUser.authenticateUser(authenticationDetails, {
+    onSuccess: (result) => {
+      console.log('access token + ' + result.getAccessToken().getJwtToken());
+      Config.credentials = new CognitoIdentityCredentials({
+        IdentityPoolId: appConfig.IdentityPoolId,
+        Logins: {
+          [`cognito-idp.${appConfig.region}.amazonaws.com/${appConfig.UserPoolId}`]: result.getIdToken().getJwtToken()
+        }
+      });
+      alert('Success');
+      console.log(Config.credentials);
+    },
+    onFailure: (err) => {
+      alert(err);
+    },
+  });
+}
 
 
 takePicture = async function() {
@@ -66,6 +101,7 @@ takePicture = async function() {
 };
 
   async componentWillMount() {
+
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
     let permission = await Expo.Permissions.askAsync(Expo.Permissions.CAMERA_ROLL);
@@ -74,6 +110,7 @@ takePicture = async function() {
       console.log('Granted')
     }
   }
+  
 
   render() {
     if(this.state.controllerLaunched){
@@ -85,6 +122,7 @@ takePicture = async function() {
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
     } else {
+      this._cognitoSingIn();
       return (
           <Camera
                 style={{flex: 4, flexDirection: 'row', alignItems: 'flex-end', maxHeight:'100%' }}

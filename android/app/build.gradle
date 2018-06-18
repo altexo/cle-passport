@@ -137,6 +137,8 @@ android {
 }
 
 dependencies {
+    compile project(':amazon-cognito-identity-js')
+    compile project(':react-native-aws-cognito-js')
     compile (project(':react-native-camera')) {
     exclude group: "com.google.android.gms"
     compile 'com.android.support:exifinterface:25.+'
