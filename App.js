@@ -20,34 +20,35 @@ import ScanIdBack from './views/signUp/scanIdBack.js';
 import verifyidBack from './views/signUp/verifyidBack.js';
 import TakeASelfieScreen from './views/TakeASelfieScreen.js';
 import VerifyPinScreen from './views/signUp/VerifyPinScreen.js';
-import AmazonCognitoIdentity from 'amazon-cognito-identity-js';
-import Amplify from 'aws-amplify';
+// import AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+// import { withAuthenticator } from 'aws-amplify-react-native';
+// import Amplify from 'aws-amplify-react-native';
 
-Amplify.configure({
-    Auth: {
-    // REQUIRED - Amazon Cognito Identity Pool ID
-        identityPoolId: 'us-west-2:2b780d89-b164-404c-9d21-4148a6d3ee18',
-    // REQUIRED - Amazon Cognito Region
-        region: 'us-west-2',
-    // OPTIONAL - Amazon Cognito User Pool ID
-        userPoolId: 'us-west-2_w1b1FWdV8',
-    // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-        userPoolWebClientId: '7mkla4lrl0lu04jp6d9fqupa7e',
-    // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
-        mandatorySignIn: false,
-    // OPTIONAL - Configuration for cookie storage
-        // cookieStorage: {
-        // // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-        //     domain: '.yourdomain.com',
-        // // OPTIONAL - Cookie path
-        //     path: '/',
-        // // OPTIONAL - Cookie expiration in days
-        //     expires: 365,
-        // // OPTIONAL - Cookie secure flag
-        //     secure: true
-        // }
-    }
-});
+// Amplify.configure({
+//     Auth: {
+//     // REQUIRED - Amazon Cognito Identity Pool ID
+//         identityPoolId: 'us-west-2:2b780d89-b164-404c-9d21-4148a6d3ee18',
+//     // REQUIRED - Amazon Cognito Region
+//         region: 'us-west-2',
+//     // OPTIONAL - Amazon Cognito User Pool ID
+//         userPoolId: 'us-west-2_w1b1FWdV8',
+//     // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
+//         userPoolWebClientId: '7mkla4lrl0lu04jp6d9fqupa7e',
+//     // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
+//         mandatorySignIn: false,
+//     // OPTIONAL - Configuration for cookie storage
+//         // cookieStorage: {
+//         // // REQUIRED - Cookie domain (only required if cookieStorage is provided)
+//         //     domain: '.yourdomain.com',
+//         // // OPTIONAL - Cookie path
+//         //     path: '/',
+//         // // OPTIONAL - Cookie expiration in days
+//         //     expires: 365,
+//         // // OPTIONAL - Cookie secure flag
+//         //     secure: true
+//         // }
+//     }
+// });
 class ProfileScreen extends React.Component {
   static navigationOptions = {
     title: 'ya chingaste morro',
@@ -66,7 +67,7 @@ class ProfileScreen extends React.Component {
 }
 
 const App = createStackNavigator({
-  Authorize: { screen: ScanIdScreen},
+  Authorize: { screen: HomeView},
   Profile:{ screen:ProfileScreen},
   Selfie:{screen:showSelfieScreen},
   IdFront:{screen:verifyidFront},

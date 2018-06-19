@@ -1,22 +1,29 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Vibration, Image,CameraRoll } from 'react-native';
-import { Constants, FileSystem, Camera, Permissions,ImageManipulator } from 'expo';
-import { Auth } from 'aws-amplify';
+import { Constants, Camera, Permissions } from 'expo';
+//import { Auth } from 'aws-amplify-react-native';
+import Amplify, { Auth } from 'aws-amplify';
+import aws_exports from '../.././src/aws-exports';
 
-
+Amplify.configure(aws_exports);
 export default class ScanIdFront extends React.Component {
 _cognitoSingIn = () =>{
   const username = 'justino';
-  const password = '+`4EbERa&"fN2rP"'; 
+  const password = 'mris092dk02!2"A'; 
 Auth.signIn(username, password)
 
-  .then(user => console.log(user))
-  .catch(err => console.log(err));
+  .then(user => console.log('User: ', user),
+  Auth.currentCredentials(credentials => {
+    const tokens = Auth.essentialCredentials(credentials);
+    console.log(tokens)
+  })
+)
+  .catch(err => console.log('Err ', err));
 }
 _cognitoConfirmSignIn = () => {
   Auth.confirmSignIn(user, code)
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+    .then(data => console.log('ConfirmSignInData: ', data))
+    .catch(err => console.log('ConfirmSignInErr: ', err));
 }
   state = {
     hasCameraPermission: null,
@@ -34,40 +41,40 @@ componentDidMount() {
 }
 
 
-login = () => {
-  const { username, password } = this.state;
-  const authenticationData = {
-    Username: username,
-    Password: password,
-  };
-  const authenticationDetails = new AuthenticationDetails(authenticationData);
-  const poolData = {
-    UserPoolId: appConfig.UserPoolId,
-    ClientId: appConfig.ClientId
-  };
-  const userPool = new CognitoUserPool(poolData);
-  const userData = {
-    Username: username,
-    Pool: userPool
-  };
-  const cognitoUser = new CognitoUser(userData);
-  cognitoUser.authenticateUser(authenticationDetails, {
-    onSuccess: (result) => {
-      console.log('access token + ' + result.getAccessToken().getJwtToken());
-      Config.credentials = new CognitoIdentityCredentials({
-        IdentityPoolId: appConfig.IdentityPoolId,
-        Logins: {
-          [`cognito-idp.${appConfig.region}.amazonaws.com/${appConfig.UserPoolId}`]: result.getIdToken().getJwtToken()
-        }
-      });
-      alert('Success');
-      console.log(Config.credentials);
-    },
-    onFailure: (err) => {
-      alert(err);
-    },
-  });
-}
+// login = () => {
+//   const { username, password } = this.state;
+//   const authenticationData = {
+//     Username: username,
+//     Password: password,
+//   };
+//   const authenticationDetails = new AuthenticationDetails(authenticationData);
+//   const poolData = {
+//     UserPoolId: appConfig.UserPoolId,
+//     ClientId: appConfig.ClientId
+//   };
+//   const userPool = new CognitoUserPool(poolData);
+//   const userData = {
+//     Username: username,
+//     Pool: userPool
+//   };
+//   const cognitoUser = new CognitoUser(userData);
+//   cognitoUser.authenticateUser(authenticationDetails, {
+//     onSuccess: (result) => {
+//       console.log('access token + ' + result.getAccessToken().getJwtToken());
+//       Config.credentials = new CognitoIdentityCredentials({
+//         IdentityPoolId: appConfig.IdentityPoolId,
+//         Logins: {
+//           [`cognito-idp.${appConfig.region}.amazonaws.com/${appConfig.UserPoolId}`]: result.getIdToken().getJwtToken()
+//         }
+//       });
+//       alert('Success');
+//       console.log(Config.credentials);
+//     },
+//     onFailure: (err) => {
+//       alert(err);
+//     },
+//   });
+// }
 
 
 takePicture = async function() {
