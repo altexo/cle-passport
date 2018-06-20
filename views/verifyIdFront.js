@@ -65,17 +65,20 @@ class verifyidFront extends React.Component{
                   <Button style={{height:60,width: '100%'}} title="Retry"/>
                   <Button style={{height:60,width: '100%'}} title="continue"/>
               </View> */}
-              <View style={ styles.bottomView}>
+              <View style={{flexDirection:'row'}}>
             
  
-                <TouchableOpacity style={styles.buttonStyle}>
-                    <Text style={{color: 'white', textAlign: 'right'}}>RETRY</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.buttonStyle} onPress={()=>navigate('scanidInstructionsBack')}>
-                    <Text style={{color: 'white', textAlign: 'left'}}>CONTINUE</Text>
-                  </TouchableOpacity>
 
-              </View>
+
+                         
+
+            <View style={{flex:1,right:2}} ><Button style={{width:400,height:150}}title='Retry' onPress={()=>navigate('scanFrontId')}></Button></View>
+             <View style={{flex:1,left:2}}><Button style={{height:60,height:150}} title='Continue' onPress={()=>navigate('scanidInstructionsBack')}></Button></View>
+
+
+     
+
+    </View>
             
           
             </View>
