@@ -71,6 +71,7 @@ class ScanIdScreen extends Component{
        
     
     render(){
+        const { navigate } = this.props.navigation;
         return (
          
           
@@ -115,7 +116,7 @@ class ScanIdScreen extends Component{
                 <Text style={{color: '#0592fe', marginTop: '30%', fontSize: 20}}>Clé Benefits</Text>
                </View>
                <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.buttonStyles}>
+                <TouchableOpacity style={styles.buttonStyles}  onPress={()=>navigate('ScannerQr')}>
                     <Image/><Text style={{color: 'white', fontSize: 20}}>Scan QR Code</Text>
                 </TouchableOpacity>
                </View>

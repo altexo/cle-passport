@@ -38,6 +38,7 @@ componentDidMount() {
 
 takePicture = async function() {
   if (this.camera) {
+    
      return this.camera.takePictureAsync().then(data => {
            console.log("first then",data)
 
@@ -52,6 +53,7 @@ takePicture = async function() {
           Vibration.vibrate();   
    
           const { navigate } = this.props.navigation;
+          this.setState( {type: Camera.Constants.Type.back});
        
           navigate('Selfie',data2)      
           this.camera.componentWillUnmount()
@@ -61,7 +63,7 @@ takePicture = async function() {
     
     );
 
-    console.log("miando aqui",await photo);
+  
 
  
       

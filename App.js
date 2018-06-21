@@ -20,6 +20,7 @@ import ScanIdBack from './views/signUp/scanIdBack.js';
 import verifyidBack from './views/signUp/verifyidBack.js';
 import TakeASelfieScreen from './views/TakeASelfieScreen.js';
 import VerifyPinScreen from './views/signUp/VerifyPinScreen.js';
+import QRscanner from './views/QrScanner.js';
 // import AmazonCognitoIdentity from 'amazon-cognito-identity-js';
 // import { withAuthenticator } from 'aws-amplify-react-native';
 // import Amplify from 'aws-amplify-react-native';
@@ -67,7 +68,7 @@ class ProfileScreen extends React.Component {
 }
 
 const App = createStackNavigator({
-  Authorize: { screen: HomeView},
+  Authorize: {screen:HomeView},
   Profile:{ screen:ProfileScreen},
   Selfie:{screen:showSelfieScreen},
   IdFront:{screen:verifyidFront},
@@ -83,7 +84,8 @@ const App = createStackNavigator({
   scanID:{screen:ScanIdScreen},
   TakeSelfie:{screen:TakeASelfieScreen},
   verifyPin:{screen:VerifyPinScreen},
-  infoVerify:{screen:VerifyInfoScreen}
+  infoVerify:{screen:VerifyInfoScreen},
+  ScannerQr:{screen:QRscanner}
 
 
 });
