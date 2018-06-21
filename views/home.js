@@ -39,7 +39,7 @@ const HomeView = class HomeScreen extends React.Component {
           <View style={styles.buttonContainer}>
             <Button style={styles.singupButton} 
              icon={require('cle-passport/assets/icons/user-plus.svg')}
-              title="Sing Up"
+              title="Sign Up"
               onPress={() =>
                 navigate('Terms')
               }

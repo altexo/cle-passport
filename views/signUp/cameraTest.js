@@ -75,7 +75,7 @@ takePicture = async function() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
     let permission = await Expo.Permissions.askAsync(Expo.Permissions.CAMERA_ROLL);
-
+    this.setState( {type: Camera.Constants.Type.front});
     if (permission.status === 'granted') {
       console.log('Granted')
     }
