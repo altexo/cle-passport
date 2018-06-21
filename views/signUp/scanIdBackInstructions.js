@@ -5,9 +5,29 @@ class scanidBackInstructions extends Component{
 
 
 
+
+
+  componentWillMount(){
+    const params = this.props.navigation.state
+    console.log('Params: ScanIdBackInstructions ')
+    console.log(params.params.uri)
+    let imageURL = params.params
+    
+    // //Test
+    // let imageURL = 'content://media/external/images/media/21708'
+    // //EndTest
+    this.setState({imageUri:{
+        uri: imageURL
+      }
+    });
+    
+  }
+
+
+
 handlePress = () => {
     const { navigate } = this.props.navigation;
-    navigate('scanBackId')
+    navigate('scanBackId',this.props.navigation.state.params.uri)
 
 
 }

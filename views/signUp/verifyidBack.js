@@ -9,11 +9,11 @@ class verifyidBack extends React.Component{
     
 
         componentWillMount(){
-          const dim = Dimensions.get('screen');
+    
           const params = this.props.navigation.state
-          console.log('Params: ')
+          console.log('Params: verifyBackID')
           console.log(params.params)
-          let imageURL = params.params
+          let imageURL = params.params.image2
           
           // //Test
           // let imageURL = 'content://media/external/images/media/21708'
@@ -22,7 +22,7 @@ class verifyidBack extends React.Component{
               uri: imageURL
             }
           });
-          console.log(dim)
+         
           
         }
 
@@ -72,7 +72,7 @@ class verifyidBack extends React.Component{
                          
 
             <View style={{flex:1,right:2}} ><Button style={{width:400,height:150}}title='Retry' onPress={()=>navigate('scanBackId')}></Button></View>
-             <View style={{flex:1,left:2}}><Button style={{height:60,height:150}} title='Continue' onPress={()=>navigate('infoVerify')}></Button></View>
+             <View style={{flex:1,left:2}}><Button style={{height:60,height:150}} title='Continue' onPress={()=>navigate('infoVerify',this.props.navigation.state.params)}></Button></View>
 
 
      

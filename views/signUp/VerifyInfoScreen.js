@@ -17,6 +17,30 @@ const options = {
   successActionStatus: 201
 }
 class VerifyInfoScreen extends Component{
+
+    componentWillMount(){
+    
+        const params = this.props.navigation.state
+        console.log('        Params: verifyInfo                                                    ')
+        console.log(params.params)
+       
+    
+        
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     _cognitoSingIn = () =>{
         const username = 'justino';
         const password = 'mris092dk02!2"A'; 

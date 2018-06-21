@@ -3,15 +3,15 @@ import { View, Text, StyleSheet,Image,Button,CameraRoll, TouchableOpacity  } fro
 import { Constants, FileSystem, Camera, Permissions,ImageManipulator } from 'expo';
 import { Dimensions } from 'react-native';
 class verifyidFront extends React.Component{
-
+        
 
     
     
 
         componentWillMount(){
-          const dim = Dimensions.get('screen');
+        
           const params = this.props.navigation.state
-          console.log('Params: ')
+          console.log('Params: VeriFyFrontID ')
           console.log(params.params)
           let imageURL = params.params
           
@@ -22,7 +22,7 @@ class verifyidFront extends React.Component{
               uri: imageURL
             }
           });
-          console.log(dim)
+        
           
         }
 
@@ -73,7 +73,7 @@ class verifyidFront extends React.Component{
                          
 
             <View style={{flex:1,right:2}} ><Button style={{width:400,height:150}}title='Retry' onPress={()=>navigate('scanFrontId')}></Button></View>
-             <View style={{flex:1,left:2}}><Button style={{height:60,height:150}} title='Continue' onPress={()=>navigate('scanidInstructionsBack')}></Button></View>
+             <View style={{flex:1,left:2}}><Button style={{height:60,height:150}} title='Continue' onPress={()=>navigate('scanidInstructionsBack',this.state.imageUri)}></Button></View>
 
 
      

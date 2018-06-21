@@ -11,6 +11,11 @@ export default class ScanIdBack extends React.Component {
   };
   state ={ controllerLaunched: false };
 
+
+
+
+  
+
   updateControllerLauncher = () => {
       this.setState({ controllerLaunched: true });
   }
@@ -23,9 +28,22 @@ export default class ScanIdBack extends React.Component {
 //     }
 // }
 componentDidMount() {
-  // FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
-  //   console.log(e, 'Directory exists');
-  // });
+
+   
+    const params = this.props.navigation.state
+    console.log('Params: ScanIdBack')
+    console.log(params.params)
+    let imageURL = params.params
+    
+    // //Test
+    // let imageURL = 'content://media/external/images/media/21708'
+    // //EndTest
+    this.setState({imageUri:{
+        uri: imageURL
+      }
+    });
+ 
+ 
 
 }
 
@@ -42,15 +60,13 @@ takePicture = async function() {
 
             CameraRoll.saveToCameraRoll(data.uri, 'photo').then( data2=>{
            
-            console.log("second then",data2);
-            this.setState({ photoId: this.state.photoId + 1,Imagesource:{
-              uri: data2
-            }         
+           
+            this.setState({ images:{image:this.props.navigation.state.params,image2:data2}
           });
-             
+          console.log("this.state before",this.state.images);
           Vibration.vibrate();   
           const { navigate } = this.props.navigation;
-          navigate('IdBack',data2)       
+          navigate('IdBack',this.state.images)       
         });
 
      }
