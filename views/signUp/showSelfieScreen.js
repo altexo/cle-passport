@@ -22,16 +22,26 @@ class showSelfieScreen extends React.Component{
         }
 
 
-        handlepress = (previousState,val)=>{
+        handlepress = ()=>{
+          const { navigate } = this.props.navigation;
+         
+       
+          console.log('show selfie test')
+          console.log( this.props.navigation)
+          
+          navigate('pin', this.props.navigation.state.params)
 
-          this.setState(
-          { text: previousState.text+val });
+
+         
       }
+
      
   
     render(){
+     
+      
       const { navigate } = this.props.navigation;
-   
+
         return (
             <View style={styles.container}>
               <View style={{flex: 0.2}}>
@@ -41,16 +51,7 @@ class showSelfieScreen extends React.Component{
                 <Image style={{width: 400, height:330}} source={this.state.imageUri}/>       
               </View>
            
-              {/* <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.buttonStyle}>
-                    <Text style={{color: 'white', textAlign: 'center'}}>RETRY</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.buttonStyle}>
-                    <Text style={{color: 'white', textAlign: 'center'}}>CONTINUE</Text>
-                  </TouchableOpacity>
-                  <Button style={{height:60,width: '100%'}} title="Retry"/>
-                  <Button style={{height:60,width: '100%'}} title="continue"/>
-              </View> */}
+         
               <View style={{flexDirection:'row'}}>
             
  
@@ -59,7 +60,7 @@ class showSelfieScreen extends React.Component{
                          
 
                       <View style={{flex:1,right:2}} ><Button style={{width:400,height:150}}title='Retry' onPress={()=>navigate('TakeSelfieWelcome')}></Button></View>
-                       <View style={{flex:1,left:2}}><Button style={{height:60,height:150}} title='Continue' onPress={()=>navigate('pin')}></Button></View>
+                       <View style={{flex:1,left:2}}><Button style={{height:60,height:150}} title='Continue' onPress={()=>this.handlepress()}></Button></View>
 
 
                

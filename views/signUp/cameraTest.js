@@ -50,19 +50,11 @@ takePicture = async function() {
           });
              
           Vibration.vibrate();   
-<<<<<<< Updated upstream
-          
-          const { navigate } = this.props.navigation;
-       
-          navigate('Selfie',data2)      
-          //this.camera.componentWillUnmount()
-=======
    
           const { navigate } = this.props.navigation;
        
           navigate('Selfie',data2)      
           this.camera.componentWillUnmount()
->>>>>>> Stashed changes
         });
         
      }

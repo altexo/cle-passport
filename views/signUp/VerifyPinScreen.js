@@ -20,6 +20,39 @@ class VerifyPinScreen extends Component{
     
         
         state = { text: '' }
+
+
+        componentWillMount(){
+          
+            const params = this.props.navigation.state
+            console.log('Params: PIN24 ')
+            console.log(params.params.params)
+            let imageURL = params
+            
+            // //Test
+            // let imageURL = 'content://media/external/images/media/21708'
+            // //EndTest
+            this.setState({imageUri:{
+                uri: imageURL
+              }
+            });
+            
+          }
+
+          navigationpress = ()=>{
+            const { navigate } = this.props.navigation;
+           previousPin =this.props.navigation.state.params.text
+           console.log("verifying Pin")
+           console.log( previousPin)
+           if(previousPin==this.state.text)
+
+            navigate('Almost',this.props.navigation.state.params.params)
+
+            else{
+
+                alert("no concide con el pin anterior")
+            }
+        }
     
   
 handlepress = (previousState,val)=>{
@@ -37,7 +70,7 @@ Deletepress = (previousState)=>{
     
 
       render(){
-        const { navigate } = this.props.navigation;
+        
         return (
             <View style={styles.container}>
             <View style={styles.textContainer}>
@@ -95,7 +128,7 @@ Deletepress = (previousState)=>{
                         <TouchableHighlight  onPress={()=>this.handlepress(this.state,'0')} style={[styles.CircleShapeView,styles.Colum2]} > 
                                     <NumberButton key="0" id="0"/>
                         </TouchableHighlight>
-                        <TouchableHighlight  onPress={()=>navigate('Almost')} style={styles.Colum3} > 
+                        <TouchableHighlight  onPress={()=>this.navigationpress()} style={styles.Colum3} > 
                                 <Text style={{fontSize:15}}>OK</Text>
                         </TouchableHighlight>
                             

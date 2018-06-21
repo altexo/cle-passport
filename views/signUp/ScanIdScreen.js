@@ -9,10 +9,49 @@ import ScanIdBack from './scanIdBack';
 import scanidBackInstructions from './scanIdBackInstructions';
 import scanidFrontInstructions from './scanIdFrontInstructions';
 
+          
+
+
+
 class ScanIdScreen extends Component{
+
+  
+    
     state = {
-        isModalVisible: false
-      };
+        isModalVisible: false,
+        imageUri:{
+            uri:''
+
+      }}
+    
+    
+  componentWillMount(){
+
+   
+          
+    const params = this.props.navigation.state
+    console.log('Params: ScanID ')
+    console.log(params.params.uri)
+    let imageURL = params.params.uri
+    
+    // //Test
+    // let imageURL = 'content://media/external/images/media/21708'
+    // //EndTest
+    this.setState({imageUri:{
+        uri: imageURL
+      }
+    });
+
+    console.log('image uri')
+
+    console.log(this.state.imageUri)
+
+    
+    
+  }
+
+
+
     
       _toggleModal = () =>{
 
@@ -40,9 +79,7 @@ class ScanIdScreen extends Component{
                <View style={styles.card}>
                     <View style={{flex: 0.8, alignItems: 'center',
         justifyContent:'center',}}>
-                    <Image style={{}}
-                        source={require('cle-passport/assets/icons/baseline_account_box_black_48dp.png')}
-                    />
+                    <Image style={{width: 150, height:150}} source={this.state.imageUri}/>
                     </View>
                     <View style={{flex: 2}}>
                     <Modal isVisible={this.state.isModalVisible} style={{height: 100}}>
@@ -63,7 +100,7 @@ class ScanIdScreen extends Component{
                         </View>
                     </Modal>
                         <Text style={{fontSize: 30, textAlign: 'center', fontWeight: 'bold', marginBottom: '5%', marginTop: '5%'}}>Clé Passport</Text>
-                        <Text style={{fontSize: 20, textAlign: 'center'}}>It look your Clé passport is incomplete</Text>
+                        <Text style={{fontSize: 20, textAlign: 'center'}}>      It look your Clé passport is incomplete</Text>
                     </View>
                </View>
                <View style={{alignItems: 'stretch', height: 0.4}}>
@@ -71,6 +108,7 @@ class ScanIdScreen extends Component{
              
                     <Text style={{color: 'white', fontSize: 20}}>Scan Oficial ID</Text>
                 </TouchableOpacity>
+                
                 {/* <Button style={{height: 90}} style={{position: 'absolute'}}title="Scan Oficial ID"/> */}
                </View>
                <View style={styles.detailsContainer}>

@@ -2,6 +2,26 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image,TouchableOpacity,Button  } from "react-native";
 
 class AlmosDoneScreen extends Component{
+
+  componentWillMount(){
+          
+    const params = this.props.navigation.state
+    console.log('Params: AlmostDone ')
+    console.log(params.params)
+    let imageURL = params
+    
+    // //Test
+    // let imageURL = 'content://media/external/images/media/21708'
+    // //EndTest
+    this.setState({imageUri:{
+        uri: imageURL
+      }
+    });
+    
+  }
+
+
+
     render(){
       const { navigate } = this.props.navigation;
         return (
@@ -30,7 +50,7 @@ class AlmosDoneScreen extends Component{
         
             <View style={styles.buttonContainer}>
      
-            <Button title='Continuar' onPress={()=>navigate('scanID')}></Button>
+            <Button title='Continuar' onPress={()=>navigate('scanID',this.props.navigation.state.params)}></Button>
             </View>
           
           </View>

@@ -5,6 +5,8 @@ import { View, Text, StyleSheet,Image,Button,TextInput,TouchableWithoutFeedback,
  
 class NumberButton extends Component{
  
+   
+
  
 render(){
     return(<View style={styles.number1}><Text>{this.props.id}</Text></View>)
@@ -19,7 +21,26 @@ render(){
 class CreatePinScreen extends Component{
     
         
-        state = { text: '' }
+        state = { text: '' ,
+    params:{uri:this.props.navigation.state.params}}
+
+
+        componentWillMount(){
+          
+            const params = this.props.navigation.state
+            console.log('Params: PIN ')
+            console.log(params.params)
+            let imageURL = params
+            
+            // //Test
+            // let imageURL = 'content://media/external/images/media/21708'
+            // //EndTest
+            this.setState({imageUri:{
+                uri: imageURL
+              }
+            });
+            
+          }
     
   
 handlepress = (previousState,val)=>{
@@ -95,7 +116,7 @@ Deletepress = (previousState)=>{
                         <TouchableHighlight  onPress={()=>this.handlepress(this.state,'0')} style={[styles.CircleShapeView,styles.Colum2]} > 
                                     <NumberButton key="0" id="0"/>
                         </TouchableHighlight>
-                        <TouchableHighlight  onPress={()=>navigate('verifyPin')} style={styles.Colum3} > 
+                        <TouchableHighlight  onPress={()=>navigate('verifyPin',this.state)} style={styles.Colum3} > 
                                 <Text style={{fontSize:15}}>OK</Text>
                         </TouchableHighlight>
                             
