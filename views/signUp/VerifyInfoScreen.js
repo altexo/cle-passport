@@ -1,11 +1,51 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity  } from "react-native";
 //import Icon from 'react-native-vector-icons/FontAwesome';
+import Amplify, { Auth } from 'aws-amplify';
+import aws_exports from '../.././src/aws-exports';
 
+Amplify.configure(aws_exports);
+var accessKeyId = "";
+var secretKey = "";
 
-
+const options = {
+  keyPrefix: "02510593-F581-415F-A9A9-42E8ABD4FE58/",
+  bucket: "stage-organization-documents",
+  region: "us-west-2",
+  // accessKey: token.accessKeyId,
+  // secretKey: token.data.Credentials.secretKey,
+  successActionStatus: 201
+}
 class VerifyInfoScreen extends Component{
+    _cognitoSingIn = () =>{
+        const username = 'justino';
+        const password = 'mris092dk02!2"A'; 
+      Auth.signIn(username, password)
+      
+        .then(//user => console.log('User: ', user),
+          Auth.currentCredentials(credentials => {
+          const tokens = Auth.essentialCredentials(credentials);
+          console.log('Estos son los tokens: ',tokens)
+        }).then(token => {
+          console.log('Primero el token: ', token)
+          accessKeyId = token.accessKeyId;
+          secretKey = token.data.Credentials.SecretKey;
+          console.log('AccessKey: ', accessKeyId)
+          console.log('SecretKey: ', secretKey)
+          }
+          
+        )
+      )
+        .catch(err => console.log('Err ', err));
+      }
+      _cognitoConfirmSignIn = () => {
+        Auth.confirmSignIn(user, code)
+          .then(data => console.log('ConfirmSignInData: ', data))
+          .catch(err => console.log('ConfirmSignInErr: ', err));
+      }
+
     render(){
+        this._cognitoSingIn();
         return (
             
             <View style={styles.container}>
