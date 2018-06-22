@@ -58,7 +58,7 @@ class VerifyInfoScreen extends Component {
                 .then((result) => {
                     console.log("Imágen subida");
                     console.log(result);
-                    //Aqui hay un fallo, el path que genera debería ser 02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png
+                    //Aqui hay un fallo, el path que genera amplify y donde sube la imagen debería ser 02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png
                     //pero le agrega private/us-west-2:e2773771-e4b0-48d6-b4e1-34010f5be2ca/private antes del path
                     //hay que revisar la documentación de amplify para indicarle el key a subir correctamente
                     this._getData("imagenPrueba.png");
