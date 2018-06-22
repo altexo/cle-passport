@@ -13,7 +13,7 @@ import scanidFrontInstructions from './scanIdFrontInstructions';
 
 
 
-class ScanIdScreen extends Component{
+class LastScreen extends Component{
 
   
     
@@ -29,22 +29,22 @@ class ScanIdScreen extends Component{
 
    
           
-    const params = this.props.navigation.state
-    console.log('Params: ScanID ')
-    console.log(params.params.uri)
-    let imageURL = params.params.uri
+    // const params = this.props.navigation.state
+    // console.log('Params: ScanID ')
+    // console.log(params.params.uri)
+    // let imageURL = params.params.uri
     
-    // //Test
-    // let imageURL = 'content://media/external/images/media/21708'
-    // //EndTest
-    this.setState({imageUri:{
-        uri: imageURL
-      }
-    });
+    // // //Test
+    // // let imageURL = 'content://media/external/images/media/21708'
+    // // //EndTest
+    // this.setState({imageUri:{
+    //     uri: imageURL
+    //   }
+    // });
 
-    console.log('image uri')
+    // console.log('image uri')
 
-    console.log(this.state.imageUri)
+    // console.log(this.state.imageUri)
 
     
     
@@ -80,7 +80,7 @@ class ScanIdScreen extends Component{
                <View style={styles.card}>
                     <View style={{flex: 0.8, alignItems: 'center',
         justifyContent:'center',}}>
-                    <Image style={{width: 150, height:150}} source={this.state.imageUri}/>
+                    <Image style={{width: 150, height:150 ,left:10}} source={require('cle-passport/assets/icons/baseline_account_box_black_48dp.png')}/>
                     </View>
                     <View style={{flex: 2}}>
                     <Modal isVisible={this.state.isModalVisible} style={{height: 100}}>
@@ -101,13 +101,15 @@ class ScanIdScreen extends Component{
                         </View>
                     </Modal>
                         <Text style={{fontSize: 30, textAlign: 'center', fontWeight: 'bold', marginBottom: '5%', marginTop: '5%'}}>Clé Passport</Text>
-                        <Text style={{fontSize: 20, textAlign: 'center'}}>      It looks your Clé passport is incomplete</Text>
+                        <Text style={{fontSize: 15, textAlign: 'center',fontWeight: 'bold'}}> Name:     </Text>
+                        <Text style={{fontSize: 15, textAlign: 'center',fontWeight: 'bold'}}> Last Name:     </Text>
+                        <Text style={{fontSize: 15, textAlign: 'center',fontWeight: 'bold'}}> Age:     </Text>
                     </View>
                </View>
                <View style={{alignItems: 'stretch', height: 0.4}}>
-                <TouchableOpacity style={styles.buttonStyles}  onPress={this._toggleModal}>
+                <TouchableOpacity style={styles.buttonStyles}  >
              
-                    <Text style={{color: 'white', fontSize: 20}}>Scan Oficial ID</Text>
+                    <Text style={{color: 'white', fontSize: 20}}>View</Text>
                 </TouchableOpacity>
                 
                 {/* <Button style={{height: 90}} style={{position: 'absolute'}}title="Scan Oficial ID"/> */}
@@ -126,7 +128,7 @@ class ScanIdScreen extends Component{
     }
 } 
 
-export default ScanIdScreen
+export default LastScreen
 
 const styles = StyleSheet.create({
     container: {

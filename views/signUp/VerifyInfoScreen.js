@@ -14,10 +14,10 @@ var imageUri = "";
 class VerifyInfoScreen extends Component{
 
     componentWillMount(){
-        const params = this.props.navigation.state
-        console.log('        Params: verifyInfo                                                    ')
-        console.log(params.params)
-        imageUri = params.params.image
+         const params = this.props.navigation.state
+         console.log('Params: verifyInfo)                                                    ')
+      console.log(params.params)
+      
         
       }
 
@@ -84,6 +84,8 @@ class VerifyInfoScreen extends Component{
       }
     render(){
         this._cognitoSingIn();
+        const { navigate } = this.props.navigation;
+
         return (
             
             <View style={styles.container}>
@@ -138,7 +140,7 @@ class VerifyInfoScreen extends Component{
                    
                 </View>    
                 <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.buttonStyles}>
+                        <TouchableOpacity style={styles.buttonStyles} onPress={()=>navigate('screenLast')}>
                             <Text style={{color: 'white', fontSize: 15}}>CONFIRM</Text>
                         </TouchableOpacity>
                 </View>
