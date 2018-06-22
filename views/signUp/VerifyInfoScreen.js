@@ -3,43 +3,23 @@ import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity  } from
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, { Auth } from 'aws-amplify';
 import aws_exports from '../.././src/aws-exports';
+import { RNS3 } from 'react-native-aws3';
+
 
 Amplify.configure(aws_exports);
 var accessKeyId = "";
 var secretKey = "";
 
-const options = {
-  keyPrefix: "02510593-F581-415F-A9A9-42E8ABD4FE58/",
-  bucket: "stage-organization-documents",
-  region: "us-west-2",
-  // accessKey: token.accessKeyId,
-  // secretKey: token.data.Credentials.secretKey,
-  successActionStatus: 201
-}
+var imageUri = "";
 class VerifyInfoScreen extends Component{
 
     componentWillMount(){
-    
         const params = this.props.navigation.state
         console.log('        Params: verifyInfo                                                    ')
         console.log(params.params)
-       
-    
+        imageUri = params.params.image
         
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     _cognitoSingIn = () =>{
         const username = 'justino';
@@ -49,25 +29,59 @@ class VerifyInfoScreen extends Component{
         .then(//user => console.log('User: ', user),
           Auth.currentCredentials(credentials => {
           const tokens = Auth.essentialCredentials(credentials);
-          console.log('Estos son los tokens: ',tokens)
-        }).then(token => {
+
+            }).then(token => {
           console.log('Primero el token: ', token)
           accessKeyId = token.accessKeyId;
           secretKey = token.data.Credentials.SecretKey;
           console.log('AccessKey: ', accessKeyId)
           console.log('SecretKey: ', secretKey)
-          }
+          this._uploadToAws(accessKeyId, secretKey)
+          })
           
-        )
-      )
-        .catch(err => console.log('Err ', err));
+        ).catch(err => console.log('Err ', err));
       }
+      
       _cognitoConfirmSignIn = () => {
         Auth.confirmSignIn(user, code)
           .then(data => console.log('ConfirmSignInData: ', data))
           .catch(err => console.log('ConfirmSignInErr: ', err));
       }
+      _uploadToAws = (aKey, sKey) => {
+        console.log('ack', aKey)
+        console.log('sk', sKey)
+       const options = {  
+            keyPrefix: "02510593-F581-415F-A9A9-42E8ABD4FE58/",
+            bucket: "stage-organization-documents",
+            region: "us-west-2",
+            accessKey: aKey,
+            secretKey: sKey,
+            successActionStatus: 201
+        }
+        const file = {
+            // `uri` can also be a file system path (i.e. file://)
+            uri: imageUri,
+            name: "frontId.png",
+            type: "image/png"
+          }
 
+          RNS3.put(file, options).then(response => {
+              console.log('resp', response);
+            if (response.status !== 201)
+              throw new Error("Failed to upload image to S3", response);
+            console.log(response.body);
+            /**
+             * {
+             *   postResponse: {
+             *     bucket: "your-bucket",
+             *     etag : "9f620878e06d28774406017480a59fd4",
+             *     key: "uploads/image.png",
+             *     location: "https://your-bucket.s3.amazonaws.com/uploads%2Fimage.png"
+             *   }
+             * }
+             */
+          }).catch(err => console.log('Error: ', err));
+      }
     render(){
         this._cognitoSingIn();
         return (
