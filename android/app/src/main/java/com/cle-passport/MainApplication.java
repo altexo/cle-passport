@@ -3,6 +3,10 @@ package com.cle-passport;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.reactnative.camera.RNCameraPackage;
+import org.wonday.orientation.OrientationPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.amazonaws.amplify.pushnotification.RNPushNotificationPackage;
 import com.amazonaws.RNAWSCognitoPackage;
 import com.airlabsinc.RNAWSCognitoPackage;
 import com.amazonaws.RNAWSCognitoPackage;
@@ -29,6 +33,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNCameraPackage(),
+            new OrientationPackage(),
+            new RNFetchBlobPackage(),
+            new RNPushNotificationPackage(),
             new RNAWSCognitoPackage(),
             new RNAWSCognitoPackage(),
             new RNAWSCognitoPackage(),
