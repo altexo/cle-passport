@@ -50,7 +50,7 @@ class VerifyInfoScreen extends Component {
 
     _uploadToAws = () => {
         
-        let imagePath = "private/us-west-2:e2773771-e4b0-48d6-b4e1-34010f5be2ca/private/02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png";
+        let imagePath = "/02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png";
         fetch(imageUri).then((response => {
             response.blob().then(blob => {
                 console.log('##### Vamos a subir la imagen: ' + imageUri);
