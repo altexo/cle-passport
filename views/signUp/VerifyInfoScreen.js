@@ -58,7 +58,10 @@ class VerifyInfoScreen extends Component {
                 .then((result) => {
                     console.log("Imágen subida");
                     console.log(result);
-                    this._getData(result.key);
+                    //Aqui hay un fallo, el path que genera debería ser 02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png
+                    //pero le agrega private/us-west-2:e2773771-e4b0-48d6-b4e1-34010f5be2ca/private antes del path
+                    //hay que revisar la documentación de amplify para indicarle el key a subir correctamente
+                    this._getData("imagenPrueba.png");
                 })
 
                 .catch(
@@ -84,6 +87,8 @@ class VerifyInfoScreen extends Component {
             
 
             let params = {
+                // si la imagen es: 02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png
+                //el image path del body, solo debería ser imagenPrueba.png
                 body: {"category":"OFFICIAL_ID","subcategory":"INE","size":"1","entries":[{"name":"what?","index":0,"file":{"type":"image","name":imagePath,"mode":"download"}}]},
             
                 headers: {
