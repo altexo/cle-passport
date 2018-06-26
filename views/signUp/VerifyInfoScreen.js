@@ -1,100 +1,137 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity  } from "react-native";
+import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity } from "react-native";
 //import Icon from 'react-native-vector-icons/FontAwesome';
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify, { Auth, Storage, API } from 'aws-amplify';
 import aws_exports from '../.././src/aws-exports';
 import { RNS3 } from 'react-native-aws3';
 
-
 Amplify.configure(aws_exports);
-var accessKeyId = "";
-var secretKey = "";
+
 
 var imageUri = "";
-class VerifyInfoScreen extends Component{
+class VerifyInfoScreen extends Component {
 
-    componentWillMount(){
-         const params = this.props.navigation.state
-         console.log('Params: verifyInfo)                                                    ')
-      console.log(params.params)
-      
-        
-      }
+    componentWillMount() {
+        const params = this.props.navigation.state;
+        console.log('        Params: verifyInfo                                                    ');
+        console.log(params.params);
+        imageUri = params.params.image;
+        this.setState({name:''});
 
-    _cognitoSingIn = () =>{
-        const username = 'justino';
-        const password = 'mris092dk02!2"A'; 
-      Auth.signIn(username, password)
-      
-        .then(//user => console.log('User: ', user),
-          Auth.currentCredentials(credentials => {
-          const tokens = Auth.essentialCredentials(credentials);
-
-            }).then(token => {
-          console.log('Primero el token: ', token)
-          accessKeyId = token.accessKeyId;
-          secretKey = token.data.Credentials.SecretKey;
-          console.log('AccessKey: ', accessKeyId)
-          console.log('SecretKey: ', secretKey)
-          this._uploadToAws(accessKeyId, secretKey)
-          })
-          
-        ).catch(err => console.log('Err ', err));
-      }
-      
-      _cognitoConfirmSignIn = () => {
-        Auth.confirmSignIn(user, code)
-          .then(data => console.log('ConfirmSignInData: ', data))
-          .catch(err => console.log('ConfirmSignInErr: ', err));
-      }
-      _uploadToAws = (aKey, sKey) => {
-        console.log('ack', aKey)
-        console.log('sk', sKey)
-       const options = {  
-            keyPrefix: "02510593-F581-415F-A9A9-42E8ABD4FE58/",
-            bucket: "stage-organization-documents",
-            region: "us-west-2",
-            accessKey: aKey,
-            secretKey: sKey,
-            successActionStatus: 201
-        }
-        const file = {
-            // `uri` can also be a file system path (i.e. file://)
-            uri: imageUri,
-            name: "frontId.png",
-            type: "image/png"
-          }
-
-          RNS3.put(file, options).then(response => {
-              console.log('resp', response);
-            if (response.status !== 201)
-              throw new Error("Failed to upload image to S3", response);
-            console.log(response.body);
-            /**
-             * {
-             *   postResponse: {
-             *     bucket: "your-bucket",
-             *     etag : "9f620878e06d28774406017480a59fd4",
-             *     key: "uploads/image.png",
-             *     location: "https://your-bucket.s3.amazonaws.com/uploads%2Fimage.png"
-             *   }
-             * }
-             */
-          }).catch(err => console.log('Error: ', err));
-      }
-    render(){
+    }
+    componentDidMount() {
         this._cognitoSingIn();
-        const { navigate } = this.props.navigation;
+        this._uploadToAws();
+    }
+
+    _cognitoSingIn = () => {
+        const username = 'justino';
+        const password = 'mris092dk02!2"A';
+        Auth.signIn(username, password)
+
+            .then(//user => console.log('User: ', user),
+                Auth.currentCredentials().then(token => {
+                    console.log('############### essentials!!');
+                    
+                    console.log('Primero el token: ', token)
+                    accessKeyId = token.accessKeyId;
+                    secretKey = token.data.Credentials.SecretKey;
+                    console.log('AccessKey: ', accessKeyId)
+                    console.log('SecretKey: ', secretKey)
+                })
+
+                
+            ).catch(err => console.log('Err ', err));
+    }
+
+
+
+
+
+    _uploadToAws = () => {
+        
+        let imagePath = "/02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png";
+        fetch(imageUri).then((response => {
+            response.blob().then(blob => {
+                console.log('##### Vamos a subir la imagen: ' + imageUri);
+                Storage.put(imagePath, blob, { level: 'private' })
+                .then((result) => {
+                    console.log("Imágen subida");
+                    console.log(result);
+                    //Aqui hay un fallo, el path que genera amplify y donde sube la imagen debería ser 02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png
+                    //pero le agrega private/us-west-2:e2773771-e4b0-48d6-b4e1-34010f5be2ca/private antes del path
+                    //hay que revisar la documentación de amplify para indicarle el key a subir correctamente
+                    this._getData("imagenPrueba.png");
+                })
+
+                .catch(
+                    (e) => {
+                        console.log('Fallo al subir imagen ' + e);
+                    }
+                );
+            });
+        }));
+    }
+
+    _getData = (imagePath) => {
+        let apiName = "Cle API";
+        let path = '/services/organization/02510593-F581-415F-A9A9-42E8ABD4FE58/ocr'; 
+        console.log('Analizar: ' + imagePath);
+        Auth.currentSession().then(cognitoSession => {
+            let idToken = cognitoSession.idToken.jwtToken;
+            let accessToken = cognitoSession.accessToken.jwtToken;
+            console.log("ID Token:");
+            console.log(idToken);
+            console.log("Acces Token");
+            console.log(accessToken);
+            
+
+            let params = {
+                // si la imagen es: 02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png
+                //el image path del body, solo debería ser imagenPrueba.png
+                body: {"category":"OFFICIAL_ID","subcategory":"INE","size":"1","entries":[{"name":"what?","index":0,"file":{"type":"image","name":imagePath,"mode":"download"}}]},
+            
+                headers: {
+                    Authenticate: idToken,
+                    "Content-Type": 'application/json'
+                }
+            }
+            
+            API.post(apiName, path, params).then(response => {
+                console.log('Response OK');
+                console.log(response);
+                let data = {name: response.fields[0].value,
+                    fechaNac: response.fields[1].value,
+                    sexo: response.fields[2].value,
+                    domicilio: response.fields[3].value,
+                    clave: response.fields[4].value,
+                    curp: response.fields[5].value,
+                    emision: response.fields[6].value,
+                    vigencia: response.fields[7].value
+                };
+                console.log(data);
+                this.setState(data);
+                
+
+            }).catch(error => {
+                console.log('Response Fail');
+                console.log(error)
+            });
+        });
+
+    }
+
+    render() {
 
         return (
-            
+
             <View style={styles.container}>
                 <View style={styles.titlesContainer}>
                     <Text style={styles.titleText}>Verify Your Information</Text>
                     <Text style={styles.subTitleText}>Verify and edit yout information if necessary</Text>
                 </View>
                 <View style={styles.formContainer}>
-               
+
                     {/* <Madoka
                         label={'Name'}
                         // this is used as active and passive border color
@@ -104,51 +141,54 @@ class VerifyInfoScreen extends Component{
                     /> */}
                     <Text>Name</Text>
                     <TextInput underlineColorAndroid="transparent"
-                        style={{height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10}}
-                      //  placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({text})}
+                        style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
+                        //  placeholder="Type here to translate!"
+                        onChangeText={(text) => this.setState({ name })}
+                        value={this.state.name}
                     />
 
-                      <Text>First Name</Text>
+                    <Text>First Name</Text>
                     <TextInput underlineColorAndroid="transparent"
-                        style={{height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10,  marginBottom: 10}}
-                       // placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({text})}
+                        style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
+                        // placeholder="Type here to translate!"
+                        onChangeText={(text) => this.setState({ text })}
                     />
-                      <Text>Second Name</Text>
+                    <Text>Second Name</Text>
                     <TextInput underlineColorAndroid="transparent"
-                        style={{height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10,  marginBottom: 10}}
-                       // placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({text})}
+                        style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
+                        // placeholder="Type here to translate!"
+                        onChangeText={(text) => this.setState({ text })}
                     />
-                      <Text>Birthday</Text>
+                    <Text>Birthday</Text>
                     <TextInput underlineColorAndroid="transparent"
-                        style={{height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10}}
+                        style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
                         //placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({text})}
+                        onChangeText={(text) => this.setState({ fechaNac })}
+                        value={this.state.fechaNac}
                     />
-                      <Text>Address</Text>
+                    <Text>Address</Text>
                     <TextInput underlineColorAndroid="transparent"
-                        style={{height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10}}
-                      //  placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({text})}
+                        style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
+                        //  placeholder="Type here to translate!"
+                        onChangeText={(text) => this.setState({ domicilio })}
+                        value={this.state.domicilio}
                     />
 
-                   
-                  
+
+
                     {/* <Button title="Confirm"/> */}
-                   
-                </View>    
+
+                </View>
                 <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.buttonStyles} onPress={()=>navigate('screenLast')}>
-                            <Text style={{color: 'white', fontSize: 15}}>CONFIRM</Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonStyles}>
+                        <Text style={{ color: 'white', fontSize: 15 }}>CONFIRM</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
-      
+
         );
     }
-} 
+}
 
 export default VerifyInfoScreen
 
@@ -157,22 +197,22 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
-    titlesContainer:{
+    titlesContainer: {
         flex: 0.5,
-       // backgroundColor: 'green'
+        // backgroundColor: 'green'
     },
-    titleText:{
+    titleText: {
         fontSize: 25,
         textAlign: 'center'
     },
-    subTitleText:{
+    subTitleText: {
         marginTop: 5,
         fontSize: 15,
         textAlign: 'center'
     },
-    formContainer:{
+    formContainer: {
         flex: 3,
-       // backgroundColor: 'blue',
+        // backgroundColor: 'blue',
         padding: 16,
         // borderStyle: 'solid',
         // borderLeftWidth: Dimensions.get('window').width,
@@ -184,23 +224,23 @@ const styles = StyleSheet.create({
 
     },
 
-      buttonContainer:{
-        width: '100%', 
-        height: 50, 
-        backgroundColor: '#0592fe', 
+    buttonContainer: {
+        width: '100%',
+        height: 50,
+        backgroundColor: '#0592fe',
         alignItems: 'center',
-        flexDirection: 'row' ,
+        flexDirection: 'row',
         position: 'absolute',
         bottom: 0,
-        justifyContent:'center',
+        justifyContent: 'center',
     },
-    buttonStyles:{
+    buttonStyles: {
         backgroundColor: '#0592fe',
         height: 40,
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
         flexDirection: 'row',
-        width: '100%', 
+        width: '100%',
 
     },
 
