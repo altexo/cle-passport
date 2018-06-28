@@ -21,7 +21,6 @@ class VerifyInfoScreen extends Component {
     }
     componentDidMount() {
         this._cognitoSingIn();
-        this._uploadToAws();
     }
 
     _cognitoSingIn = () => {
@@ -31,13 +30,12 @@ class VerifyInfoScreen extends Component {
 
             .then(//user => console.log('User: ', user),
                 Auth.currentCredentials().then(token => {
-                    console.log('############### essentials!!');
-                    
                     console.log('Primero el token: ', token)
                     accessKeyId = token.accessKeyId;
                     secretKey = token.data.Credentials.SecretKey;
                     console.log('AccessKey: ', accessKeyId)
                     console.log('SecretKey: ', secretKey)
+                    this._uploadToAws();
                 })
 
                 
@@ -49,19 +47,24 @@ class VerifyInfoScreen extends Component {
 
 
     _uploadToAws = () => {
-        
-        let imagePath = "/02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png";
+        const customPrefix = {
+            public: '02510593-F581-415F-A9A9-42E8ABD4FE58',
+            protected: '02510593-F581-415F-A9A9-42E8ABD4FE58',
+            private: '02510593-F581-415F-A9A9-42E8ABD4FE58'
+        };
+
+
+        let imagePath = "clePOC.png";
+
         fetch(imageUri).then((response => {
             response.blob().then(blob => {
                 console.log('##### Vamos a subir la imagen: ' + imageUri);
-                Storage.put(imagePath, blob, { level: 'private' })
+                Storage.put(imagePath, blob, { level: 'private', customPrefix:customPrefix, 
+                identityId: new String('') })
                 .then((result) => {
                     console.log("Imágen subida");
                     console.log(result);
-                    //Aqui hay un fallo, el path que genera amplify y donde sube la imagen debería ser 02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png
-                    //pero le agrega private/us-west-2:e2773771-e4b0-48d6-b4e1-34010f5be2ca/private antes del path
-                    //hay que revisar la documentación de amplify para indicarle el key a subir correctamente
-                    this._getData("imagenPrueba.png");
+                    this._getData(result.key);
                 })
 
                 .catch(
