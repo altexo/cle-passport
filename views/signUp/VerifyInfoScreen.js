@@ -5,6 +5,7 @@ import Amplify, { Auth, Storage, API } from 'aws-amplify';
 import aws_exports from '../.././src/aws-exports';
 import { RNS3 } from 'react-native-aws3';
 
+
 Amplify.configure(aws_exports);
 
 
@@ -50,12 +51,21 @@ class VerifyInfoScreen extends Component {
 
 
     _uploadToAws = () => {
+
+         customPrefix = {
+            public: '02510593-F581-415F-A9A9-42E8ABD4FE58/',
+            protected: '02510593-F581-415F-A9A9-42E8ABD4FE58/',
+            private: '02510593-F581-415F-A9A9-42E8ABD4FE58/'
+        };
         
-        let imagePath = "/02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png";
+        let imagePath = "imagenPrueba.png";
         fetch(imageUri).then((response => {
             response.blob().then(blob => {
                 console.log('##### Vamos a subir la imagen: ' + imageUri);
-                Storage.put(imagePath, blob, { level: 'private' })
+
+
+            
+                Storage.put(imagePath, blob, { customPrefix: '02510593-F581-415F-A9A9-42E8ABD4FE58/' })
                 .then((result) => {
                     console.log("Imágen subida");
                     console.log(result);
@@ -63,18 +73,27 @@ class VerifyInfoScreen extends Component {
                     let key = result.key;
                     console.log(key)
 
-
-                    Storage.get(key, {level: 'private'})
+                    Storage.get('imagenPrueba.png', {customPrefix: '02510593-F581-415F-A9A9-42E8ABD4FE58/' })
                     .then(result => {
-
-
-
+                        console.log('looking up')
                         console.log(result)
-                        console.log('looking out')
-                    }     
-                        )
+                        this._getData(result)})
                     .catch(err => console.log('Storage Path Err: ',err));
                    // this._getData("imagenPrueba.png");
+            
+
+
+                //     Storage.get(key, {level: 'private'})
+                //     .then(result => {
+
+
+
+                //         console.log(result)
+                //         console.log('looking out')
+                //     }     
+                //         )
+                //     .catch(err => console.log('Storage Path Err: ',err));
+                //    // this._getData("imagenPrueba.png");
             
 
 
