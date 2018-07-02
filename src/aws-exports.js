@@ -16,7 +16,7 @@ const config ={
     },
     Storage: {
         bucket: 'stage-organization-documents', //REQUIRED -  Amazon S3 bucket
-        region: 'us-west-2', //OPTIONAL -  Amazon service region
+        //region: 'us-west-2', //OPTIONAL -  Amazon service region
     }
 
 }

@@ -52,7 +52,10 @@ class verifyidBack extends React.Component{
       }
 
     
-      navigationPress = ()=>{
+      navigationPress = ()=>  {
+        // setTimeout(function(){
+        //   this._toggleModal()
+        // }, 5000);
     const { navigate } = this.props.navigation;
     this._toggleModal()
     setTimeout(function(){

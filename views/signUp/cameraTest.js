@@ -106,7 +106,9 @@ takePicture = async function() {
           <Camera
                 style={{flex: 0.8,marginLeft: 15, marginRight: 15, flexDirection: 'row', alignItems: 'flex-end' }}
                 ref={ (ref) => {this.camera = ref} }type={this.state.type}
+                
             >
+
                 <View style={{ flex: 1 }}></View>
                 <TouchableOpacity
                     style={{ marginBottom: 3}}

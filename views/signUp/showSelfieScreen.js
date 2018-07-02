@@ -48,7 +48,7 @@ class showSelfieScreen extends React.Component{
                 <Text style={{fontSize: 30}}>Your profile photo</Text>
               </View>
               <View style={styles.imageContainer}>
-                <Image style={{width: 400, height:330}} source={this.state.imageUri}/>       
+                <Image style={{width: 400, height:330, transform: [{ scaleX: -1 }]}} source={this.state.imageUri}/>       
               </View>
            
          

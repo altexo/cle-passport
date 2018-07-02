@@ -5,6 +5,7 @@
     "name": "cle-passport",
     "version": "1.0.0",
     "sdkVersion": "27.0.0",
+    "icon": "ic_launcher.png",
     "android": {
       "package": "com.yourcompany.yourappname"
     }
