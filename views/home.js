@@ -52,14 +52,34 @@ const HomeView = class HomeScreen extends React.Component {
     }
   }
 const styles = StyleSheet.create({
-container:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'flex-start',alignItems:'center'},
-logoContainer:{ flex:2, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},
+container:{ 
+  flex:1,
+  backgroundColor: '#FFFFFF',
+  justifyContent:'flex-start',
+  alignItems:'center'
+},
+logoContainer:{ 
+  flex:2, 
+  backgroundColor: '#FFFFFF',
+  justifyContent:'center',
+  alignItems:'center'
+},
 imageContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},
 bodyContainer:{ flex:3, backgroundColor: '#FFFFFF',width:'100%',justifyContent:'flex-start',alignItems:'center'},
 titleContainer:{ flex:1, backgroundColor: '#FFFFFF',width:'70%',justifyContent:'center',alignItems:'center'},
 titleText:{fontSize:40, top:20},
-instructionContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'stretch'},
-welcomeText:{fontSize:16 , bottom:70},
+instructionContainer:{ 
+  
+  flex:1, 
+  //backgroundColor: '#FFFFFF',
+  justifyContent:'center',
+  alignItems:'stretch'
+},
+welcomeText:{
+  fontSize:16 , 
+  bottom:70, 
+  marginTop: '10%'
+},
 indicatorContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'},
 welcomeindicatorContainer:{ flex:1, backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'stretch',bottom:20},
 imgIndicator:{width:50,height:50},

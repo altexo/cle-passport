@@ -10,7 +10,12 @@ Amplify.configure(aws_exports);
 
 var imageUri = "";
 class VerifyInfoScreen extends Component {
-
+    state ={
+        name: '',
+        text: '',
+        fechaNac: '',
+        domicilio: ''
+    }
     componentWillMount() {
         const params = this.props.navigation.state;
         console.log('        Params: verifyInfo                                                    ');
