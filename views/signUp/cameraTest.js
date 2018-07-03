@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, Vibration, Image,CameraRoll } from 'react
 import { Constants, FileSystem, Camera, Permissions,ImageManipulator } from 'expo';
 import showSelfieScreen from './showSelfieScreen.js';
 import { createStackNavigator } from 'react-navigation';
+import store from './store.js';
 
 
 export default class cameraTest extends React.Component {
@@ -54,7 +55,7 @@ takePicture = async function() {
    
           const { navigate } = this.props.navigation;
           this.setState( {type: Camera.Constants.Type.back});
-       
+           store.selfie=data2
           navigate('Selfie',data2)      
           this.camera.componentWillUnmount()
         });

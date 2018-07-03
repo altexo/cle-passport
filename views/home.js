@@ -13,6 +13,7 @@ import Amplify from 'aws-amplify';
 const HomeView = class HomeScreen extends React.Component {
   
     render() {
+  
       const { navigate } = this.props.navigation;
       return (
         <View style={styles.container}>

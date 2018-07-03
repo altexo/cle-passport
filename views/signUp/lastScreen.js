@@ -8,6 +8,7 @@ import ScanIdFront from './ScanIdFront';
 import ScanIdBack from './scanIdBack';
 import scanidBackInstructions from './scanIdBackInstructions';
 import scanidFrontInstructions from './scanIdFrontInstructions';
+import store from './store.js';
 
           
 
@@ -29,23 +30,17 @@ class LastScreen extends Component{
 
    
           
-    // const params = this.props.navigation.state
-    // console.log('Params: ScanID ')
-    // console.log(params.params.uri)
-    // let imageURL = params.params.uri
-    
-    // // //Test
-    // // let imageURL = 'content://media/external/images/media/21708'
-    // // //EndTest
-    // this.setState({imageUri:{
-    //     uri: imageURL
-    //   }
-    // });
-
-    // console.log('image uri')
-
-    // console.log(this.state.imageUri)
-
+    const params = this.props.navigation.state
+    console.log('Params: LastScreen ')
+    console.log('selfie',store.selfie)
+    console.log(params.params)
+    let imageUrl = params.params.selfie;
+    this.setState({imageUri:{
+        uri: imageUrl
+      }
+     });
+ 
+  
     
     
   }
@@ -80,7 +75,7 @@ class LastScreen extends Component{
                <View style={styles.card}>
                     <View style={{flex: 0.8, alignItems: 'center',
         justifyContent:'center',}}>
-                    <Image style={{width: 150, height:150 ,left:10}} source={require('cle-passport/assets/icons/baseline_account_box_black_48dp.png')}/>
+                    <Image style={{width: 150, height:150}} source={this.state.imageUri}/>
                     </View>
                     <View style={{flex: 2}}>
                     <Modal isVisible={this.state.isModalVisible} style={{height: 100}}>

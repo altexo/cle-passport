@@ -22,6 +22,7 @@ import TakeASelfieScreen from './views/TakeASelfieScreen.js';
 import VerifyPinScreen from './views/signUp/VerifyPinScreen.js';
 import QRscanner from './views/QrScanner.js';
 import LastScreen from './views/signUp/lastScreen.js';
+
 // import AmazonCognitoIdentity from 'amazon-cognito-identity-js';
 // import { withAuthenticator } from 'aws-amplify-react-native';
 // import Amplify from 'aws-amplify-react-native';
@@ -51,26 +52,11 @@ import LastScreen from './views/signUp/lastScreen.js';
 //         // }
 //     }
 // });
-class ProfileScreen extends React.Component {
-  static navigationOptions = {
-    title: 'ya chingaste morro',
-  };
-  render() {
-    const { navigate } = this.props.navigation;
-    return (
-      <Button
-        title="Go backhome"
-        onPress={() =>
-          navigate('Terms', { name: 'jane' })
-        }
-      />
-    );
-  }
-}
+
+ 
 
 const App = createStackNavigator({
   Authorize: {screen:HomeView},
-  Profile:{ screen:ProfileScreen},
   Selfie:{screen:showSelfieScreen},
   IdFront:{screen:verifyidFront},
   IdBack:{screen:verifyidBack},
