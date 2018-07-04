@@ -91,14 +91,8 @@ takePicture = async function() {
 };
 
   async componentWillMount() {
-
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
-    let permission = await Expo.Permissions.askAsync(Expo.Permissions.CAMERA_ROLL);
-
-    if (permission.status === 'granted') {
-      console.log('Granted')
-    }
+      Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE)
+   
   }
   
 
