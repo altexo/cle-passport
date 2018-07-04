@@ -18,11 +18,21 @@ export default class ScanIdFront extends React.Component {
       this.setState({ controllerLaunched: true });
   }
 
-componentDidMount() {
+// componentDidMount() {
+//   Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_LEFT)
+// }
+componentDidCatch(error, info)
 
+  async componentDidMount() {
+    
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: status === 'granted' });
+    let permission = await Expo.Permissions.askAsync(Expo.Permissions.CAMERA_ROLL);
 
-}
-
+    if (permission.status === 'granted') {
+      console.log('Granted')
+    }
+  }
 
 
 
@@ -47,20 +57,15 @@ takePicture = async function() {
 
      }
     
-    );
-
-   
-
- 
-      
-         
+    );   
   }
 };
 
-  async componentWillMount() {
-      Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE)
+  // async componentWillMount() {
+ 
    
-  }
+
+  // }
   
 
   render() {
@@ -73,14 +78,16 @@ takePicture = async function() {
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
     } else {
-     // this._cognitoSingIn();
+      //Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_LEFT)
       return (
+        <View style={{flex: 1}}>
           <Camera
                 focusDepth ={1}
-                style={{flex: 4, flexDirection: 'row', alignItems: 'flex-end', maxHeight:'100%' }}
+                style={{flex: 1, flexDirection: 'row', alignItems: 'flex-end', maxHeight:'100%' }}
+           
                 ref={ (ref) => {this.camera = ref} }type={this.state.type}
             >
-                <View style={{ flex: 1 ,alignItems: 'center'}}>
+                 <View style={{ flex: 4 ,alignItems: 'center'}}>
                 
                 
                 <TouchableOpacity onPress={this.takePicture.bind(this)}>
@@ -94,7 +101,7 @@ takePicture = async function() {
                           </View>
                   </TouchableOpacity>
                 
-                </View>
+                </View> 
               
                
                 
@@ -102,7 +109,7 @@ takePicture = async function() {
           </Camera>
                
         
-        
+        </View>
         
       
       

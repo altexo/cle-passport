@@ -8,6 +8,7 @@ class scanidBackInstructions extends Component{
 
 
   componentWillMount(){
+    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT)
     const params = this.props.navigation.state
     console.log('Params: ScanIdBackInstructions ')
     console.log(params.params.uri)
@@ -27,6 +28,7 @@ class scanidBackInstructions extends Component{
 
 handlePress = () => {
     const { navigate } = this.props.navigation;
+    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_LEFT)
     navigate('scanBackId',this.props.navigation.state.params.uri)
 
 

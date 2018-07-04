@@ -72,7 +72,7 @@ takePicture = async function() {
   }
 };
 
-  async componentWillMount() {
+  async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
     let permission = await Expo.Permissions.askAsync(Expo.Permissions.CAMERA_ROLL);

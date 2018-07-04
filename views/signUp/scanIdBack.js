@@ -29,7 +29,7 @@ export default class ScanIdBack extends React.Component {
 // }
 componentDidMount() {
 
-   
+ 
     const params = this.props.navigation.state
     console.log('Params: ScanIdBack')
     console.log(params.params)
@@ -81,7 +81,8 @@ takePicture = async function() {
   }
 };
 
-  async componentWillMount() {
+  async componentDidMount() {
+    await Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_LEFT)
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
     let permission = await Expo.Permissions.askAsync(Expo.Permissions.CAMERA_ROLL);
