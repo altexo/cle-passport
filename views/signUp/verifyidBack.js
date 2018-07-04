@@ -3,9 +3,14 @@ import { View, Text, StyleSheet,Image,Button,CameraRoll, TouchableOpacity,Alert 
 import { Constants, FileSystem, Camera, Permissions,ImageManipulator } from 'expo';
 import { Dimensions } from 'react-native';
 import Modal from "react-native-modal";
+import Amplify, { Auth, Storage, API } from 'aws-amplify';
+import aws_exports from '../.././src/aws-exports';
+import store from './store.js';
+
+Amplify.configure(aws_exports);
 
 
-
+var imageFront = "";
 class verifyidBack extends React.Component{
 
 
@@ -20,6 +25,8 @@ class verifyidBack extends React.Component{
           console.log('Params: verifyBackID')
           console.log(params.params)
           let imageURL = params.params.image2
+           imageFront = params.params.image
+     
           
           // Test
           // // let imageURL = 'content://media/external/images/media/21708'
@@ -52,19 +59,19 @@ class verifyidBack extends React.Component{
       }
 
     
-      navigationPress = ()=>  {
-        // setTimeout(function(){
-        //   this._toggleModal()
-        // }, 5000);
-    const { navigate } = this.props.navigation;
-    this._toggleModal()
-    setTimeout(function(){
+    //   navigationPress = ()=>  {
+    //     // setTimeout(function(){
+    //     //   this._toggleModal()
+    //     // }, 5000);
+    // const { navigate } = this.props.navigation;
+    // this._toggleModal()
+    // setTimeout(function(){
  
       
-      this.setState({ isModalVisible: !this.state.isModalVisible });
-      navigate('infoVerify',this.props.navigation.state.params)    
+    //   this.setState({ isModalVisible: !this.state.isModalVisible });
+    //   navigate('infoVerify',this.props.navigation.state.params)    
  
-    }.bind(this), 3000);
+    // }.bind(this), 3000);
   
 
     
@@ -73,7 +80,133 @@ class verifyidBack extends React.Component{
       
 
 
-      }
+    //   }
+
+
+
+
+      componentDidMount() {
+        this._cognitoSingIn();
+       
+    }
+
+    _cognitoSingIn = () => {
+        const username = 'justino';
+        const password = 'mris092dk02!2"A';
+        Auth.signIn(username, password)
+
+            .then(//user => console.log('User: ', user),
+                Auth.currentCredentials().then(token => {
+                    console.log('############### essentials!!');
+                    
+                    console.log('Primero el token: ', token)
+                    accessKeyId = token.accessKeyId;
+                    secretKey = token.data.Credentials.SecretKey;
+                    console.log('AccessKey: ', accessKeyId)
+                    console.log('SecretKey: ', secretKey)
+                })
+
+                
+            ).catch(err => console.log('Err ', err));
+    }
+
+
+
+
+
+   
+    _uploadToAws = () => {
+        this._toggleModal()
+        const customPrefix = {
+            public: '02510593-F581-415F-A9A9-42E8ABD4FE58',
+            protected: '02510593-F581-415F-A9A9-42E8ABD4FE58',
+            private: '02510593-F581-415F-A9A9-42E8ABD4FE58'
+        };
+
+
+        let imagePath = "clePOC.png";
+
+        fetch(imageFront).then((response => {
+            response.blob().then(blob => {
+                console.log('##### Vamos a subir la imagen: ' + imageFront);
+                Storage.put(imagePath, blob, { level: 'private', customPrefix:customPrefix, 
+                identityId: new String('') })
+                .then((result) => {
+                    console.log("Imágen subida");
+                    console.log(result);
+                   this._getData(result.key);
+                   
+                })
+
+                .catch(
+                    (e) => {
+                        console.log('Fallo al subir imagen ' + e);
+                    }
+                );
+
+
+                
+        
+
+
+
+
+
+            });
+        }));
+    }
+
+    _getData = (imagePath) => {
+     
+        let apiName = "Cle API";
+        let path = '/services/organization/02510593-F581-415F-A9A9-42E8ABD4FE58/ocr'; 
+        console.log('Analizar: ' + imagePath);
+        Auth.currentSession().then(cognitoSession => {
+            let idToken = cognitoSession.idToken.jwtToken;
+            let accessToken = cognitoSession.accessToken.jwtToken;
+            console.log("ID Token:");
+            console.log(idToken);
+            console.log("Acces Token");
+            console.log(accessToken);
+            
+
+            let params = {
+                // si la imagen es: 02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png
+                //el image path del body, solo debería ser imagenPrueba.png
+                body: {"category":"OFFICIAL_ID","subcategory":"INE","size":"1","entries":[{"name":"what?","index":0,"file":{"type":"image","name":imagePath,"mode":"download"}}]},
+            
+                headers: {
+                    Authenticate: idToken,
+                    "Content-Type": 'application/json'
+                }
+            }
+            
+            API.post(apiName, path, params).then(response => {
+                console.log('Response OK');
+                console.log(response);
+                let data = {name: response.fields[0].value,
+                    fechaNac: response.fields[1].value,
+                    sexo: response.fields[2].value,
+                    domicilio: response.fields[3].value,
+                    clave: response.fields[4].value,
+                    curp: response.fields[5].value,
+                    emision: response.fields[6].value,
+                    vigencia: response.fields[7].value,
+                    selfie: store.selfie
+                };
+                console.log(data);
+                this.setState(data);
+
+                this.setState({ isModalVisible: !this.state.isModalVisible });
+                const { navigate } = this.props.navigation;
+                 navigate('infoVerify',data) 
+                
+
+            }).catch(error => {
+                console.log('Response Fail');
+                console.log(error)
+            });
+        });}
      
   
     render(){
@@ -131,7 +264,7 @@ class verifyidBack extends React.Component{
                          
 
             <View style={{flex:1,right:2}} ><Button style={{width:400,height:150}}title='Retry' onPress={()=>navigate('scanBackId')}></Button></View>
-             <View style={{flex:1,left:2}}><Button style={{height:60,height:150}} title='Continue' onPress={()=>this.navigationPress()}></Button></View>
+             <View style={{flex:1,left:2}}><Button style={{height:60,height:150}} title='Continue' onPress={()=> this._uploadToAws()}></Button></View>
 
 
      

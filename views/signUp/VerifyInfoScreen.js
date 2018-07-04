@@ -24,126 +24,14 @@ class VerifyInfoScreen extends Component {
         this.setState({name:''});
 
     }
-    componentDidMount() {
-        this._cognitoSingIn();
-        this._uploadToAws();
-    }
-
-    _cognitoSingIn = () => {
-        const username = 'justino';
-        const password = 'mris092dk02!2"A';
-        Auth.signIn(username, password)
-
-            .then(//user => console.log('User: ', user),
-                Auth.currentCredentials().then(token => {
-                    console.log('############### essentials!!');
-                    
-                    console.log('Primero el token: ', token)
-                    accessKeyId = token.accessKeyId;
-                    secretKey = token.data.Credentials.SecretKey;
-                    console.log('AccessKey: ', accessKeyId)
-                    console.log('SecretKey: ', secretKey)
-                })
-
-                
-            ).catch(err => console.log('Err ', err));
-    }
-
-
-
-
-
    
-    _uploadToAws = () => {
-        const customPrefix = {
-            public: '02510593-F581-415F-A9A9-42E8ABD4FE58',
-            protected: '02510593-F581-415F-A9A9-42E8ABD4FE58',
-            private: '02510593-F581-415F-A9A9-42E8ABD4FE58'
-        };
 
-
-        let imagePath = "clePOC.png";
-
-        fetch(imageUri).then((response => {
-            response.blob().then(blob => {
-                console.log('##### Vamos a subir la imagen: ' + imageUri);
-                Storage.put(imagePath, blob, { level: 'private', customPrefix:customPrefix, 
-                identityId: new String('') })
-                .then((result) => {
-                    console.log("Imágen subida");
-                    console.log(result);
-                    this._getData(result.key);
-                   
-                })
-
-                .catch(
-                    (e) => {
-                        console.log('Fallo al subir imagen ' + e);
-                    }
-                );
-
-
-                
-        
-
-
-
-
-
-            });
-        }));
-    }
-
-    _getData = (imagePath) => {
-        let apiName = "Cle API";
-        let path = '/services/organization/02510593-F581-415F-A9A9-42E8ABD4FE58/ocr'; 
-        console.log('Analizar: ' + imagePath);
-        Auth.currentSession().then(cognitoSession => {
-            let idToken = cognitoSession.idToken.jwtToken;
-            let accessToken = cognitoSession.accessToken.jwtToken;
-            console.log("ID Token:");
-            console.log(idToken);
-            console.log("Acces Token");
-            console.log(accessToken);
-            
-
-            let params = {
-                // si la imagen es: 02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png
-                //el image path del body, solo debería ser imagenPrueba.png
-                body: {"category":"OFFICIAL_ID","subcategory":"INE","size":"1","entries":[{"name":"what?","index":0,"file":{"type":"image","name":imagePath,"mode":"download"}}]},
-            
-                headers: {
-                    Authenticate: idToken,
-                    "Content-Type": 'application/json'
-                }
-            }
-            
-            API.post(apiName, path, params).then(response => {
-                console.log('Response OK');
-                console.log(response);
-                let data = {name: response.fields[0].value,
-                    fechaNac: response.fields[1].value,
-                    sexo: response.fields[2].value,
-                    domicilio: response.fields[3].value,
-                    clave: response.fields[4].value,
-                    curp: response.fields[5].value,
-                    emision: response.fields[6].value,
-                    vigencia: response.fields[7].value
-                };
-                console.log(data);
-                this.setState(data);
-                
-
-            }).catch(error => {
-                console.log('Response Fail');
-                console.log(error)
-            });
-        });
-
-    }
+    
 
     render() {
-
+        const { navigate } = this.props.navigation;
+        const params = this.props.navigation.state;
+       
         return (
 
             <View style={styles.container}>
@@ -201,7 +89,7 @@ class VerifyInfoScreen extends Component {
 
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.buttonStyles}>
+                    <TouchableOpacity style={styles.buttonStyles} onPress={()=> navigate('screenLast',params.params) }>
                         <Text style={{ color: 'white', fontSize: 15 }}>CONFIRM</Text>
                     </TouchableOpacity>
                 </View>

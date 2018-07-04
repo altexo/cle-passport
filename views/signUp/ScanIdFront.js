@@ -24,40 +24,7 @@ componentDidMount() {
 }
 
 
-// login = () => {
-//   const { username, password } = this.state;
-//   const authenticationData = {
-//     Username: username,
-//     Password: password,
-//   };
-//   const authenticationDetails = new AuthenticationDetails(authenticationData);
-//   const poolData = {
-//     UserPoolId: appConfig.UserPoolId,
-//     ClientId: appConfig.ClientId
-//   };
-//   const userPool = new CognitoUserPool(poolData);
-//   const userData = {
-//     Username: username,
-//     Pool: userPool
-//   };
-//   const cognitoUser = new CognitoUser(userData);
-//   cognitoUser.authenticateUser(authenticationDetails, {
-//     onSuccess: (result) => {
-//       console.log('access token + ' + result.getAccessToken().getJwtToken());
-//       Config.credentials = new CognitoIdentityCredentials({
-//         IdentityPoolId: appConfig.IdentityPoolId,
-//         Logins: {
-//           [`cognito-idp.${appConfig.region}.amazonaws.com/${appConfig.UserPoolId}`]: result.getIdToken().getJwtToken()
-//         }
-//       });
-//       alert('Success');
-//       console.log(Config.credentials);
-//     },
-//     onFailure: (err) => {
-//       alert(err);
-//     },
-//   });
-// }
+
 
 
 takePicture = async function() {
@@ -109,6 +76,7 @@ takePicture = async function() {
      // this._cognitoSingIn();
       return (
           <Camera
+                focusDepth ={1}
                 style={{flex: 4, flexDirection: 'row', alignItems: 'flex-end', maxHeight:'100%' }}
                 ref={ (ref) => {this.camera = ref} }type={this.state.type}
             >
