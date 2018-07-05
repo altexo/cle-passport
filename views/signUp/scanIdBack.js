@@ -57,16 +57,14 @@ takePicture = async function() {
   if (this.camera) {
      return this.camera.takePictureAsync().then(data => {
            console.log("first then",data)
-
             CameraRoll.saveToCameraRoll(data.uri, 'photo').then( data2=>{
-           
-           
             this.setState({ images:{image:this.props.navigation.state.params,image2:data2}
           });
           console.log("this.state before",this.state.images);
           Vibration.vibrate();   
           const { navigate } = this.props.navigation;
-          navigate('IdBack',this.state.images)       
+          navigate('IdBack',this.state.images);       
+          Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP);
         });
 
      }

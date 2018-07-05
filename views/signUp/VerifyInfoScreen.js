@@ -12,6 +12,8 @@ var imageUri = "";
 class VerifyInfoScreen extends Component {
     state ={
         name: '',
+        firstSurname: '',
+        secondSurname: '',
         text: '',
         fechaNac: '',
         domicilio: ''
@@ -21,7 +23,14 @@ class VerifyInfoScreen extends Component {
         console.log('        Params: verifyInfo                                                    ');
         console.log(params.params);
         imageUri = params.params.image;
-        this.setState({name:''});
+        this.setState({
+            name:params.params.name,
+            firstSurname:params.params.firstSurname,
+            firstSurname:params.params.firstSurname,
+            secondSurname:params.params.secondSurname,
+            fechaNac:params.params.fechaNac,
+            domicilio:params.params.domicilio
+        });
 
     }
    
@@ -60,13 +69,15 @@ class VerifyInfoScreen extends Component {
                     <TextInput underlineColorAndroid="transparent"
                         style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
                         // placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({ text })}
+                        onChangeText={(text) => this.setState({ firstSurname })}
+                        value={this.state.firstSurname}
                     />
                     <Text>Second Name</Text>
                     <TextInput underlineColorAndroid="transparent"
                         style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
                         // placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({ text })}
+                        onChangeText={(text) => this.setState({ secondSurname })}
+                        value={this.state.secondSurname}
                     />
                     <Text>Birthday</Text>
                     <TextInput underlineColorAndroid="transparent"

@@ -3,26 +3,15 @@ import { View, Text, StyleSheet, Image,Button  } from "react-native";
 
 class scanidFrontInstructions extends Component{
 
- componentDidMount() {
-
-  Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT)
- 
-}
-
 handlePress = () => {
     const { navigate } = this.props.navigation;
-    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_LEFT)
-    navigate('scanFrontId')
+    navigate('scanFrontId');
+    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_LEFT);
 
 
-}
-    
-
-
-
+} 
     render(){
         return (
-             
             <View style={styles.container}>
             <View style={styles.titleContainer}>
               <Text style={styles.titleText}>Scan your ID</Text>

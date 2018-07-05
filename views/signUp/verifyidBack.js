@@ -143,15 +143,6 @@ class verifyidBack extends React.Component{
                         console.log('Fallo al subir imagen ' + e);
                     }
                 );
-
-
-                
-        
-
-
-
-
-
             });
         }));
     }
@@ -171,8 +162,6 @@ class verifyidBack extends React.Component{
             
 
             let params = {
-                // si la imagen es: 02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png
-                //el image path del body, solo debería ser imagenPrueba.png
                 body: {"category":"OFFICIAL_ID","subcategory":"INE","size":"1","entries":[{"name":"what?","index":0,"file":{"type":"image","name":imagePath,"mode":"download"}}]},
             
                 headers: {
@@ -184,7 +173,10 @@ class verifyidBack extends React.Component{
             API.post(apiName, path, params).then(response => {
                 console.log('Response OK');
                 console.log(response);
-                let data = {name: response.fields[0].value,
+                let data = {
+                    name: response.fields[8].value,
+                    firstSurname: response.fields[9].value,
+                    secondSurname: response.fields[10].value,
                     fechaNac: response.fields[1].value,
                     sexo: response.fields[2].value,
                     domicilio: response.fields[3].value,
