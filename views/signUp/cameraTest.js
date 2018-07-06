@@ -43,39 +43,43 @@ export default class cameraTest extends React.Component {
           console.log("second then", data2);
           this.setState({
             photoId: this.state.photoId + 1, Imagesource: {
-              uri: data2, shouldShowCamera:false
+              uri: data2
             }
           }, () => {
             Vibration.vibrate();
             const { navigate } = this.props.navigation;
-            this.setState({ type: Camera.Constants.Type.back, shouldShowCamera:false });
+            this.setState({ type: Camera.Constants.Type.back});
             store.selfie = data2
             navigate('Selfie', data2);
-            
+
           });
         });
       }
-
       );
-
-
-
-
-
-
     }
   };
-
+  
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted', shouldShowCamera: true });
+    this.setState({ hasCameraPermission: status === 'granted', shouldShowCamera:true});
     let permission = await Expo.Permissions.askAsync(Expo.Permissions.CAMERA_ROLL);
     this.setState({ type: Camera.Constants.Type.front });
     if (permission.status === 'granted') {
       console.log('Granted')
     }
+    this.props.navigation.addListener('willFocus', this.activeCamera.bind(this))
+    this.props.navigation.addListener('willBlur', this.deactivateCamera.bind(this))
+  }
+  activeCamera() {
+    console.log('Activate Camera');
+    this.setState({type: Camera.Constants.Type.front, shouldShowCamera: true });
   }
 
+  deactivateCamera() {
+    console.log('Deactivate Camera!');
+    this.setState({type: Camera.Constants.Type.front, shouldShowCamera: false });
+    this.setState({type: Camera.Constants.Type.back, shouldShowCamera: false });
+  }
 
   render() {
 
@@ -95,46 +99,46 @@ export default class cameraTest extends React.Component {
             <View style={{ flex: 1 }}>
               <View style={{ flex: 0.5 }}>
                 <Text style={{ fontSize: 30, textAlign: 'center' }}>Take a selfie</Text>
-                <Text style={{ fontSize: 15, textAlign: 'left', marginLeft: 29 }}>Follow the instructions.. {this.state.shouldShowCamera + ''}</Text>
+                <Text style={{ fontSize: 15, textAlign: 'left', marginLeft: 29 }}>Follow the instructions..</Text>
               </View>
-              {this.state.shouldShowCamera?
-              <View style={{ flex: 3.5, alignItems: 'center' }}>
-              <Camera
-                  style={{ flex: 0.8, marginLeft: 15, marginRight: 15, flexDirection: 'row', alignItems: 'flex-end' }}
-                  ref={(ref) => { this.camera = ref }} type={this.state.type}
+              {this.state.shouldShowCamera ?
+                <View style={{ flex: 3.5, alignItems: 'center' }}>
+                  <Camera
+                    style={{ flex: 0.8, marginLeft: 15, marginRight: 15, flexDirection: 'row', alignItems: 'flex-end' }}
+                    ref={(ref) => { this.camera = ref }} type={this.state.type}
 
-                >
-                  <View style={{ flex: 1 }}></View>
-                  <TouchableOpacity
-                    style={{ marginBottom: 3 }}
-                    // onPress={this.takePicture.bind(this)}
-                    onPress={() => {
-                      this.setState({
-                        type: Camera.Constants.Type.front
-
-                      });
-                    }
-                    }
                   >
-                    <Image source={require('cle-passport/assets/icons/camera_front_black_24.png')} />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={{ marginBottom: 3 }}
-                    // onPress={this.takePicture.bind(this)}
-                    onPress={() => {
-                      this.setState({
-                        type: Camera.Constants.Type.back
+                    <View style={{ flex: 1 }}></View>
+                    <TouchableOpacity
+                      style={{ marginBottom: 3 }}
+                      // onPress={this.takePicture.bind(this)}
+                      onPress={() => {
+                        this.setState({
+                          type: Camera.Constants.Type.front
 
-                      });
-                    }
-                    }
-                  >
-                    <Image source={require('cle-passport/assets/icons/camera_rear_black_24.png')} />
-                  </TouchableOpacity>
+                        });
+                      }
+                      }
+                    >
+                      <Image source={require('cle-passport/assets/icons/camera_front_black_24.png')} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={{ marginBottom: 3 }}
+                      // onPress={this.takePicture.bind(this)}
+                      onPress={() => {
+                        this.setState({
+                          type: Camera.Constants.Type.back
 
-                </Camera>
-              </View>
-              :null}
+                        });
+                      }
+                      }
+                    >
+                      <Image source={require('cle-passport/assets/icons/camera_rear_black_24.png')} />
+                    </TouchableOpacity>
+
+                  </Camera>
+                </View>
+                : null}
               <View style={{ flex: 0.5, alignItems: 'center' }}>
 
                 <TouchableOpacity onPress={this.takePicture.bind(this)}>

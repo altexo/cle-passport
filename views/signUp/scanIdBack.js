@@ -8,8 +8,9 @@ export default class ScanIdBack extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
+    shouldShowCamera: false
   };
-  state ={ controllerLaunched: false };
+  state ={ controllerLaunched: false, shouldShowCamera: false };
 
 
 
@@ -42,9 +43,18 @@ componentDidMount() {
         uri: imageURL
       }
     });
- 
- 
+    
+}
 
+activeCamera() {
+  console.log('Activate Camera');
+  Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_LEFT);
+  this.setState({shouldShowCamera: true });
+}
+
+deactivateCamera() {
+  console.log('Deactivate Camera!');
+  this.setState({shouldShowCamera: false });
 }
 
 
@@ -69,25 +79,21 @@ takePicture = async function() {
 
      }
     
-    );
-
-   
-
- 
-      
-         
+    );  
   }
 };
 
   async componentDidMount() {
     await Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_LEFT)
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
+    this.setState({ hasCameraPermission: status === 'granted', shouldShowCamera: true });
     let permission = await Expo.Permissions.askAsync(Expo.Permissions.CAMERA_ROLL);
 
     if (permission.status === 'granted') {
       console.log('Granted')
     }
+    this.props.navigation.addListener('willFocus', this.activeCamera.bind(this));
+    this.props.navigation.addListener('willBlur', this.deactivateCamera.bind(this));
   }
 
   render() {
@@ -101,7 +107,8 @@ takePicture = async function() {
       return <Text>No access to camera</Text>;
     } else {
       return (
-          <Camera
+        <View style={{flex: 1}}>
+        {this.state.shouldShowCamera?<Camera
                 style={{flex: 4, flexDirection: 'row', alignItems: 'flex-end', maxHeight:'100%' }}
                 ref={ (ref) => {this.camera = ref} }type={this.state.type}
             >
@@ -124,7 +131,8 @@ takePicture = async function() {
                
                 
                 
-          </Camera>
+          </Camera>:null}
+          </View>
                
         
         
