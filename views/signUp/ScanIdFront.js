@@ -87,6 +87,7 @@ takePicture = async function() {
         <View style={{flex: 1}}>
         {this.state.shouldShowCamera?
           <Camera
+                 autoFocus={Camera.Constants.AutoFocus.on}
                 focusDepth ={1}
                 style={{flex: 1, flexDirection: 'row', alignItems: 'flex-end', maxHeight:'100%' }}
            

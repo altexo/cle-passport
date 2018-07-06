@@ -205,6 +205,9 @@ class verifyidBack extends React.Component{
             API.post(apiName, path, params).then(response => {
                 console.log('Response OK');
                 console.log(response);
+                var age = this.getAge(response.fields[1].value);
+                console.log('age')
+                console.log(age)
                 let data = {
                     name: response.fields[8].value,
                     firstSurname: response.fields[9].value,
@@ -216,11 +219,15 @@ class verifyidBack extends React.Component{
                     curp: response.fields[5].value,
                     emision: response.fields[6].value,
                     vigencia: response.fields[7].value,
-                    selfie: store.selfie
+                    selfie: store.selfie,
+                    age:age
                 };
-                var nameToVerify = data.name+' '+data.firstSurname+' '+data.secondSurname;
+                var nameToVerify = data.name;
+               
                 this._VerifyData(imagePathFront,imagePathSelfie, nameToVerify)
                 console.log(data);
+
+              
                 this.setState({data:data});
 
                
@@ -274,6 +281,17 @@ class verifyidBack extends React.Component{
                 });
             });}
          
+             getAge = (birth)=> {
+                ageMS = Date.parse(Date()) - Date.parse(birth);
+                age = new Date();
+                age.setTime(ageMS);
+                ageYear = age.getFullYear() - 1970;
+              
+                return ageYear;
+              
+                // ageMonth = age.getMonth(); // Accurate calculation of the month part of the age
+                // ageDay = age.getDate();    // Approximate calculation of the day part of the age
+              }
 
 
 

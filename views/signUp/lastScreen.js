@@ -35,9 +35,17 @@ class LastScreen extends Component{
     console.log('selfie',store.selfie)
     console.log(params.params)
     let imageUrl = params.params.selfie;
+
+    let age = params.params.age
+    let name = params.params.name
+    let firstSurname = params.params.firstSurname
+    let secondSurname = params.params.secondSurname
+    var lastname = ""+""+firstSurname+" "+""+secondSurname
+    console.log('apellido')
+    console.log(lastname)
     this.setState({imageUri:{
         uri: imageUrl
-      }
+      },names:{firstname:name,lastname:lastname},age:age
      });
  
   
@@ -96,9 +104,9 @@ class LastScreen extends Component{
                         </View>
                     </Modal>
                         <Text style={{fontSize: 30, textAlign: 'center', fontWeight: 'bold', marginBottom: '5%', marginTop: '5%'}}>Clé Passport</Text>
-                        <Text style={{fontSize: 15, textAlign: 'center',fontWeight: 'bold'}}> Name:     </Text>
-                        <Text style={{fontSize: 15, textAlign: 'center',fontWeight: 'bold'}}> Last Name:     </Text>
-                        <Text style={{fontSize: 15, textAlign: 'center',fontWeight: 'bold'}}> Age:     </Text>
+                        <Text style={{fontSize: 15, textAlign: 'center',fontWeight: 'bold',left:10}}> Name: {this.state.names.firstname}     </Text>
+                        <Text style={{fontSize: 15, textAlign: 'center',fontWeight: 'bold',left:10}}> Last Name: {this.state.names.lastname}     </Text>
+                        <Text style={{fontSize: 15, textAlign: 'center',fontWeight: 'bold',left:10}}> Age: {this.state.age}     </Text>
                     </View>
                </View>
                <View style={{alignItems: 'stretch', height: 0.4}}>
