@@ -29,7 +29,7 @@ const HomeView = class HomeScreen extends React.Component {
             <View style={styles.titleContainer}>
             <Text style={styles.titleText}>Tagline Cle</Text>
             </View>
-            <View style={styles.instructionContainer}><Text style={styles.welcomeText}>welcom screen instructions</Text>
+            <View style={styles.instructionContainer}><Text style={styles.welcomeText}>Welcome screen instructions</Text>
             </View>     
           </View>
           <View style={styles.indicatorContainer}>

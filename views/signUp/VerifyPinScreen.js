@@ -74,7 +74,7 @@ Deletepress = (previousState)=>{
         return (
             <View style={styles.container}>
             <View style={styles.textContainer}>
-                <Text style={styles.textStyle}> Confirm a PIN for accesing the application</Text>
+                <Text style={styles.textStyle}> Confirm your access PIN</Text>
             </View>
             <View style={styles.InputContainer}>
                 <Text style={{height: 60, width:300, borderColor: 'grey', borderWidth: 1,textAlign: 'center',alignItems:'center'}}>{this.state.text}</Text>

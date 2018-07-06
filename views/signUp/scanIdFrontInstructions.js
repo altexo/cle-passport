@@ -15,7 +15,7 @@ handlePress = () => {
             <View style={styles.container}>
             <View style={styles.titleContainer}>
               <Text style={styles.titleText}>Scan your ID</Text>
-              <Text style={{flex:1,fontSize:20,top:20}}>instructions....</Text>
+              <Text style={{flex:1,fontSize:20,top:20}}>Instructions...</Text>
               </View>
             <View style={styles.logoContainer}>  
               <View style={styles.imageContainer}>
@@ -24,7 +24,7 @@ handlePress = () => {
             </View>
             <View style={styles.bodyContainer}>
               
-              <View style={styles.instructionContainer}><Text style={styles.welcomeText}>why should i scan my ID?</Text>
+              <View style={styles.instructionContainer}><Text style={styles.welcomeText}>Why should I scan my ID?</Text>
               </View>     
             </View>
             <View style={styles.indicatorContainer}>

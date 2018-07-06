@@ -10,7 +10,7 @@ class TakeASelfieScreen extends Component{
               <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Take a Selfie</Text>
                 </View>  
-              <View style={styles.instructionContainer}><Text style={styles.welcomeText}>press the button to start capturing</Text>
+              <View style={styles.instructionContainer}><Text style={styles.welcomeText}>Press the button to start capturing</Text>
                 </View>     
               </View>
               <View style={styles.bodyContainer}>
@@ -24,7 +24,7 @@ class TakeASelfieScreen extends Component{
               </View>
                 
                  
-              <Text style={styles.whyShouldIText}>why should I take a selfie?</Text>
+              <Text style={styles.whyShouldIText}>Why should I take a selfie?</Text>
               </View>
               <View style={styles.indicatorContainer}>
                 <View style={styles.welcomeindicatorContainer}>

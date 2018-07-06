@@ -40,7 +40,7 @@ class AlmosDoneScreen extends Component{
            
             <View style={styles.bodyContainer}>
               
-              <View style={styles.instructionContainer}><Text style={styles.welcomeText}>to prove your name and age, you should provide your official ID document</Text>
+              <View style={styles.instructionContainer}><Text style={styles.welcomeText}>To prove your name and age, you should provide your official ID document.</Text>
               </View>     
             </View>
            

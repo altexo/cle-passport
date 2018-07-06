@@ -244,7 +244,7 @@ class verifyidBack extends React.Component{
                 
     
                 let params = {
-                    body: {'claimedIdentity':{'fullName':'ANGULO CASTRO CESAR LUDOVICO', 'faceImage':{'type':'IMAGE','extension':'PNG','url':imagePathSelfieP,'name':imagePathSelfieP,'mode':'DOWNLOAD'},'hasOrganizationRecord': true},'document':{'category':'OFFICIAL_ID','subcategory':'INE','size':1,'createDate':'1993-02-08T00:00:00','updateDate':'1993-02-08T00:00:00','entries':[{'index':0,'name':'FRONT','file':{'type':'IMAGE','extension':'PNG','url':imagePathFrontP,'name':imagePathFrontP,'Mode':'DOWNLOAD'}}]}},
+                    body: {'claimedIdentity':{'fullName':'', 'faceImage':{'type':'IMAGE','extension':'PNG','url':imagePathSelfieP,'name':imagePathSelfieP,'mode':'DOWNLOAD'},'hasOrganizationRecord': true},'document':{'category':'OFFICIAL_ID','subcategory':'INE','size':1,'createDate':'1993-02-08T00:00:00','updateDate':'1993-02-08T00:00:00','entries':[{'index':0,'name':'FRONT','file':{'type':'IMAGE','extension':'PNG','url':imagePathFrontP,'name':imagePathFrontP,'Mode':'DOWNLOAD'}}]}},
                 
                     headers: {
                         Authenticate: idToken,
@@ -307,7 +307,7 @@ class verifyidBack extends React.Component{
                     </Modal>
               <View style={{flex: 1,alignItems:'center'}}>
                 <Text style={{flex:0.2,fontSize: 30,textAlign: 'center', }}>Check Your ID Back</Text>
-                <Text style={{flex:0.2,fontSize: 20,textAlign: 'center',  }}>verify your ID photo is taken correctly      before we validate it</Text>
+                <Text style={{flex:0.2,fontSize: 20,textAlign: 'center',  }}>Verify your ID photo is taken correctly      before we validate it.</Text>
                
 
                        

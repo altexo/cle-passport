@@ -113,7 +113,7 @@ class ScanIdScreen extends Component{
                 {/* <Button style={{height: 90}} style={{position: 'absolute'}}title="Scan Oficial ID"/> */}
                </View>
                <View style={styles.detailsContainer}>
-                <Text style={{color: '#0592fe', marginTop: '30%', fontSize: 20}}>Clé Benefits</Text>
+                <Text style={{color: '#0592fe', marginTop: '30%', fontSize: 20}}>Clé Benefits.</Text>
                </View>
                <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.buttonStyles}  onPress={()=>navigate('ScannerQr')}>

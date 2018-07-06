@@ -62,7 +62,7 @@ Deletepress = (previousState)=>{
         return (
             <View style={styles.container}>
             <View style={styles.textContainer}>
-                <Text style={styles.textStyle}> Create a PIN for accesing the application</Text>
+                <Text style={styles.textStyle}> Create a PIN for accessing the application</Text>
             </View>
             <View style={styles.InputContainer}>
                 <Text style={{height: 60, width:300, borderColor: 'grey', borderWidth: 1,textAlign: 'center',alignItems:'center'}}>{this.state.text}</Text>
