@@ -22,15 +22,26 @@ export default class ScanIdFront extends React.Component {
   async componentDidMount() {
     
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted', shouldShowCamera:true });
+    this.setState({ hasCameraPermission: status === 'granted', shouldShowCamera: true});
     let permission = await Expo.Permissions.askAsync(Expo.Permissions.CAMERA_ROLL);
 
     if (permission.status === 'granted') {
       console.log('Granted')
     }
+    this.props.navigation.addListener('willFocus', this.activeCamera.bind(this))
+    this.props.navigation.addListener('willBlur', this.deactivateCamera.bind(this))
   }
 
+  activeCamera() {
+    console.log('Activate Camera');
+    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE_LEFT);
+    this.setState({shouldShowCamera: true });
+  }
 
+  deactivateCamera() {
+    console.log('Deactivate Camera!');
+    this.setState({shouldShowCamera: false });
+  }
 
 
 takePicture = async function() {
@@ -43,13 +54,12 @@ takePicture = async function() {
             console.log("second then",data2);
             this.setState({ photoId: this.state.photoId + 1,Imagesource:{
               uri: data2
-            },
-            shouldShowCamera:false       
+            }    
           }, () => {
             Vibration.vibrate();   
-            Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP);
           const { navigate } = this.props.navigation;
-          navigate('IdFront',data2)       
+          navigate('IdFront',data2);
+          Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP);       
           });
              
           

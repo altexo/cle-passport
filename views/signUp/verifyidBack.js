@@ -332,7 +332,10 @@ class verifyidBack extends React.Component{
 
                          
 
-            <View style={{flex:1,right:2}} ><Button style={{width:400,height:150}}title='Retry' onPress={()=>navigate('scanBackId')}></Button></View>
+            <View style={{flex:1,right:2}} ><Button style={{width:400,height:150}}title='Retry' onPress={()=> {
+                const { navigate } = this.props.navigation;
+                navigate('scanBackId')}
+                }></Button></View>
              <View style={{flex:1,left:2}}><Button style={{height:60,height:150}} title='Continue' onPress={()=> this._uploadToAws()}></Button></View>
 
 
