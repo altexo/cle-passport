@@ -22,7 +22,6 @@ class VerifyInfoScreen extends Component {
         const params = this.props.navigation.state;
         console.log('        Params: verifyInfo                                                    ');
         console.log(params.params);
-        imageUri = params.params.image;
         this.setState({
             name:params.params.name,
             firstSurname:params.params.firstSurname,
