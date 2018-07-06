@@ -50,7 +50,9 @@ class AlmosDoneScreen extends Component{
         
             <View style={styles.buttonContainer}>
      
-            <Button title='Continuar' onPress={()=>navigate('scanID',this.props.navigation.state.params)}></Button>
+            <Button title='Continuar' onPress={()=> {
+              this.props.navigation.navigate('scanID',this.props.navigation.state.params);
+            }}></Button>
             </View>
           
           </View>

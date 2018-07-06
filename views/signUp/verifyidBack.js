@@ -11,6 +11,7 @@ Amplify.configure(aws_exports);
 
 
 var imageFront = "";
+var ImageSelfie = "";
 class verifyidBack extends React.Component{
 
 
@@ -26,6 +27,7 @@ class verifyidBack extends React.Component{
           console.log(params.params)
           let imageURL = params.params.image2
            imageFront = params.params.image
+           imageSelfie = params.params.image3
      
           
           // Test
@@ -124,36 +126,56 @@ class verifyidBack extends React.Component{
         };
 
 
-        let imagePath = "clePOC.png";
+        let imagePathFront = "clePOC.png";
+        let imagePathSelfie = 'Selfie.png'
 
         fetch(imageFront).then((response => {
             response.blob().then(blob => {
                 console.log('##### Vamos a subir la imagen: ' + imageFront);
-                Storage.put(imagePath, blob, { level: 'private', customPrefix:customPrefix, 
+                Storage.put(imagePathFront, blob, { level: 'private', customPrefix:customPrefix, 
                 identityId: new String('') })
                 .then((result) => {
                     console.log("Imágen subida");
                     console.log(result);
                    this._getData(result.key);
+                  
+            
+
+                   fetch(imageSelfie).then((response => {
+                    response.blob().then(blob => {
+                        console.log('##### Vamos a subir la imagen: ' + imageSelfie);
+                        Storage.put(imagePathSelfie, blob, { level: 'private', customPrefix:customPrefix, 
+                        identityId: new String('') })
+                        .then((callback) => {
+                            console.log("Imágen subida");
+                            console.log(callback.key);
+                          this._VerifyData(imagePathFront,imagePathSelfie)
+                           
+                        })
+        
+                        .catch(
+                            (e) => {
+                                console.log('Fallo al subir imagen de Selfie ' + e);
+                            }
+                        );
+                    });
+                }));
+
+
                    
                 })
 
                 .catch(
                     (e) => {
-                        console.log('Fallo al subir imagen ' + e);
+                        console.log('Fallo al subir imagen de INE ' + e);
                     }
                 );
+            });
+        }));
 
-
-                
         
 
 
-
-
-
-            });
-        }));
     }
 
     _getData = (imagePath) => {
@@ -171,8 +193,6 @@ class verifyidBack extends React.Component{
             
 
             let params = {
-                // si la imagen es: 02510593-F581-415F-A9A9-42E8ABD4FE58/imagenPrueba.png
-                //el image path del body, solo debería ser imagenPrueba.png
                 body: {"category":"OFFICIAL_ID","subcategory":"INE","size":"1","entries":[{"name":"what?","index":0,"file":{"type":"image","name":imagePath,"mode":"download"}}]},
             
                 headers: {
@@ -184,7 +204,10 @@ class verifyidBack extends React.Component{
             API.post(apiName, path, params).then(response => {
                 console.log('Response OK');
                 console.log(response);
-                let data = {name: response.fields[0].value,
+                let data = {
+                    name: response.fields[8].value,
+                    firstSurname: response.fields[9].value,
+                    secondSurname: response.fields[10].value,
                     fechaNac: response.fields[1].value,
                     sexo: response.fields[2].value,
                     domicilio: response.fields[3].value,
@@ -195,12 +218,9 @@ class verifyidBack extends React.Component{
                     selfie: store.selfie
                 };
                 console.log(data);
-                this.setState(data);
+                this.setState({data:data});
 
-                this.setState({ isModalVisible: !this.state.isModalVisible });
-                const { navigate } = this.props.navigation;
-                 navigate('infoVerify',data) 
-                
+               
 
             }).catch(error => {
                 console.log('Response Fail');
@@ -208,6 +228,52 @@ class verifyidBack extends React.Component{
             });
         });}
      
+        _VerifyData = (imagePathFrontP,imagePathSelfieP) => {
+     
+            let apiName = "Cle API";
+            let path = '/services/organization/02510593-F581-415F-A9A9-42E8ABD4FE58/identity-verification'; 
+            console.log('Analizar ruta ine: ' + imagePathFrontP);
+            console.log('Analizar ruta selfie: ' + imagePathSelfieP);
+            Auth.currentSession().then(cognitoSession => {
+                let idToken = cognitoSession.idToken.jwtToken;
+                let accessToken = cognitoSession.accessToken.jwtToken;
+                console.log("ID Token:");
+                console.log(idToken);
+                console.log("Acces Token");
+                console.log(accessToken);
+                
+    
+                let params = {
+                    body: {'claimedIdentity':{'fullName':'ANGULO CASTRO CESAR LUDOVICO', 'faceImage':{'type':'IMAGE','extension':'PNG','url':imagePathSelfieP,'name':imagePathSelfieP,'mode':'DOWNLOAD'},'hasOrganizationRecord': true},'document':{'category':'OFFICIAL_ID','subcategory':'INE','size':1,'createDate':'1993-02-08T00:00:00','updateDate':'1993-02-08T00:00:00','entries':[{'index':0,'name':'FRONT','file':{'type':'IMAGE','extension':'PNG','url':imagePathFrontP,'name':imagePathFrontP,'Mode':'DOWNLOAD'}}]}},
+                
+                    headers: {
+                        Authenticate: idToken,
+                        "Content-Type": 'application/json'
+                    }
+                }
+                
+                API.post(apiName, path, params).then(response => {
+                    console.log('Response OK');
+                    console.log(response);
+                 
+                 
+    
+                    this.setState({ isModalVisible: !this.state.isModalVisible });
+                    const { navigate } = this.props.navigation;
+                    console.log("analizar")
+                    console.log(this.state)
+                     navigate('infoVerify',this.state.data) 
+                    
+    
+                }).catch(error => {
+                    console.log('Response Fail');
+                    console.log(error)
+                });
+            });}
+         
+
+
+
   
     render(){
       

@@ -3,13 +3,7 @@ import { View, Text, StyleSheet,Image,Button,CameraRoll, TouchableOpacity  } fro
 import { Constants, FileSystem, Camera, Permissions,ImageManipulator } from 'expo';
 import { Dimensions } from 'react-native';
 class verifyidFront extends React.Component{
-        
-
-    
-    
-
         componentWillMount(){
-        
           const params = this.props.navigation.state
           console.log('Params: VeriFyFrontID ')
           console.log(params.params)
@@ -25,11 +19,6 @@ class verifyidFront extends React.Component{
         
           
         }
-
-         isPortrait = () => {
-            const dim = Dimensions.get('screen');
-            return dim.height >= dim.width;
-        };
 
         
 

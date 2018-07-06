@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity, Vibration, Image,CameraRoll } from 'react-native';
 import { Constants, FileSystem, Camera, Permissions,ImageManipulator } from 'expo';
 import { createStackNavigator } from 'react-navigation';
+import store from './store.js';
 
 
 export default class ScanIdBack extends React.Component {
@@ -57,16 +58,14 @@ takePicture = async function() {
   if (this.camera) {
      return this.camera.takePictureAsync().then(data => {
            console.log("first then",data)
-
             CameraRoll.saveToCameraRoll(data.uri, 'photo').then( data2=>{
-           
-           
-            this.setState({ images:{image:this.props.navigation.state.params,image2:data2}
+            this.setState({ images:{image:this.props.navigation.state.params,image2:data2,image3:store.selfie}
           });
           console.log("this.state before",this.state.images);
           Vibration.vibrate();   
           const { navigate } = this.props.navigation;
-          navigate('IdBack',this.state.images)       
+          navigate('IdBack',this.state.images);       
+          Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP);
         });
 
      }
