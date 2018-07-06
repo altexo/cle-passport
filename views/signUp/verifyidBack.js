@@ -12,6 +12,8 @@ Amplify.configure(aws_exports);
 
 var imageFront = "";
 var ImageSelfie = "";
+let imagePathFront = "clePOC.jpg";
+let imagePathSelfie = 'Selfie.jpg'
 class verifyidBack extends React.Component{
 
 
@@ -126,8 +128,7 @@ class verifyidBack extends React.Component{
         };
 
 
-        let imagePathFront = "clePOC.png";
-        let imagePathSelfie = 'Selfie.png'
+       
 
         fetch(imageFront).then((response => {
             response.blob().then(blob => {
@@ -149,7 +150,7 @@ class verifyidBack extends React.Component{
                         .then((callback) => {
                             console.log("Imágen subida");
                             console.log(callback.key);
-                          this._VerifyData(imagePathFront,imagePathSelfie)
+                          
                            
                         })
         
@@ -217,6 +218,8 @@ class verifyidBack extends React.Component{
                     vigencia: response.fields[7].value,
                     selfie: store.selfie
                 };
+                var nameToVerify = data.name+' '+data.firstSurname+' '+data.secondSurname;
+                this._VerifyData(imagePathFront,imagePathSelfie, nameToVerify)
                 console.log(data);
                 this.setState({data:data});
 
@@ -228,7 +231,7 @@ class verifyidBack extends React.Component{
             });
         });}
      
-        _VerifyData = (imagePathFrontP,imagePathSelfieP) => {
+        _VerifyData = (imagePathFrontP,imagePathSelfieP, name) => {
      
             let apiName = "Cle API";
             let path = '/services/organization/02510593-F581-415F-A9A9-42E8ABD4FE58/identity-verification'; 
@@ -244,7 +247,7 @@ class verifyidBack extends React.Component{
                 
     
                 let params = {
-                    body: {'claimedIdentity':{'fullName':'', 'faceImage':{'type':'IMAGE','extension':'PNG','url':imagePathSelfieP,'name':imagePathSelfieP,'mode':'DOWNLOAD'},'hasOrganizationRecord': true},'document':{'category':'OFFICIAL_ID','subcategory':'INE','size':1,'createDate':'1993-02-08T00:00:00','updateDate':'1993-02-08T00:00:00','entries':[{'index':0,'name':'FRONT','file':{'type':'IMAGE','extension':'PNG','url':imagePathFrontP,'name':imagePathFrontP,'Mode':'DOWNLOAD'}}]}},
+                    body: {'claimedIdentity':{'fullName':name, 'faceImage':{'type':'IMAGE','extension':'JPG','url':imagePathSelfieP,'name':imagePathSelfieP,'mode':'DOWNLOAD'},'hasOrganizationRecord': true},'document':{'category':'OFFICIAL_ID','subcategory':'INE','size':1,'createDate':'1993-02-08T00:00:00','updateDate':'1993-02-08T00:00:00','entries':[{'index':0,'name':'FRONT','file':{'type':'IMAGE','extension':'JPG','url':imagePathFrontP,'name':imagePathFrontP,'Mode':'DOWNLOAD'}}]}},
                 
                     headers: {
                         Authenticate: idToken,

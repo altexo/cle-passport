@@ -13,6 +13,8 @@ import Amplify from 'aws-amplify';
 const HomeView = class HomeScreen extends React.Component {
   
   componentWillMount() {
+ 
+  
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT_UP);
   }
     render() {

@@ -117,7 +117,9 @@ class ScanIdScreen extends Component{
                </View>
                <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.buttonStyles}  onPress={()=>navigate('ScannerQr')}>
-                    <Image/><Text style={{color: 'white', fontSize: 20}}>Scan QR Code</Text>
+
+                      <Image source={require('cle-passport/assets/icons/qr-code.png')} style={{marginRight: 6}} />
+                      <Text style={{color: 'white', fontSize: 20}}>Scan QR Code</Text>
                 </TouchableOpacity>
                </View>
            
