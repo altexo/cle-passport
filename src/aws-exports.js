@@ -10,7 +10,7 @@ const config ={
         endpoints: [
             {
                 name: "Cle API",
-                endpoint: "https://if7bsrbugg.execute-api.us-west-2.amazonaws.com/stage"
+                endpoint: "https://xh1u2m29mi.execute-api.us-west-2.amazonaws.com/stage"
             }
         ]
     },
