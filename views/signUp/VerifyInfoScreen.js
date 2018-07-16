@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Dimensions, TextInput, TouchableOpacity } from 
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import Amplify, { Auth, Storage, API } from 'aws-amplify';
 import aws_exports from '../.././src/aws-exports';
-import { RNS3 } from 'react-native-aws3';
 
 Amplify.configure(aws_exports);
 
@@ -60,7 +59,7 @@ class VerifyInfoScreen extends Component {
                     <TextInput underlineColorAndroid="transparent"
                         style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
                         //  placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({ name })}
+                        onChangeText={(name) => this.setState({ name })}
                         value={this.state.name}
                     />
 
@@ -68,28 +67,28 @@ class VerifyInfoScreen extends Component {
                     <TextInput underlineColorAndroid="transparent"
                         style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
                         // placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({ firstSurname })}
+                        onChangeText={(firstSurname) => this.setState({ firstSurname })}
                         value={this.state.firstSurname}
                     />
                     <Text>Second Name</Text>
                     <TextInput underlineColorAndroid="transparent"
                         style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
                         // placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({ secondSurname })}
+                        onChangeText={(secondSurname) => this.setState({ secondSurname })}
                         value={this.state.secondSurname}
                     />
                     <Text>Birthday</Text>
                     <TextInput underlineColorAndroid="transparent"
                         style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
                         //placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({ fechaNac })}
+                        onChangeText={(fechaNac) => this.setState({ fechaNac })}
                         value={this.state.fechaNac}
                     />
                     <Text>Address</Text>
                     <TextInput underlineColorAndroid="transparent"
                         style={{ height: 40, borderWidth: 0.5, borderColor: 'black', padding: 10, marginBottom: 10 }}
                         //  placeholder="Type here to translate!"
-                        onChangeText={(text) => this.setState({ domicilio })}
+                        onChangeText={(domicilio) => this.setState({ domicilio })}
                         value={this.state.domicilio}
                     />
 
